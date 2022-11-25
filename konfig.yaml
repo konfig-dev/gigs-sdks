@@ -1,0 +1,4 @@
+generators:
+  typescript:
+    version: 1.0.0
+    npmName: gigs-typescript-sdk

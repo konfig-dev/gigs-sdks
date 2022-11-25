@@ -20,7 +20,7 @@ export type OpenAPIConfig = {
 
 export const OpenAPI: OpenAPIConfig = {
     BASE: 'http://localhost:4010',
-    VERSION: 'Tue Sep 27 2022 17:00:00 GMT-0700 (Pacific Daylight Time)',
+    VERSION: '2022-09-28',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',
     TOKEN: undefined,

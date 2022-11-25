@@ -1,4 +1,4 @@
-outputDirectory: /tmp/sdks
+outputDirectory: /tmp/konfig-sdks-out
 generators:
   typescript:
     packageVersion: 1.0.0

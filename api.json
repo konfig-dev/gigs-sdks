@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://api.gigs.com",
+      "url": "http://localhost:4010",
       "description": "production"
     }
   ],

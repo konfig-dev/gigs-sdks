@@ -1,4 +1,7 @@
+outputDirectory: /tmp/sdks
 generators:
   typescript:
-    version: 1.0.0
+    packageVersion: 1.0.0
+    generatorVersion: 2
+    copyDirectory: typescript
     npmName: gigs-typescript-sdk

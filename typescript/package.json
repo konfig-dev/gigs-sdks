@@ -3,16 +3,20 @@
   "version": "1.0.0",
   "description": "SDK for Gig's REST API",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/konfig-dev/gigs-sdks-2/tree/main/typescript",
   "author": "gigs.com",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "clean": "rm -rf dist/",
+    "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "^29.2.3",
     "jest": "^29.3.1",
     "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.3"
   }
 }

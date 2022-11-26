@@ -5,7 +5,7 @@ import type { project } from '../models/project';
 import type { projectSetting } from '../models/projectSetting';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
+import { Config } from '../core/Config';
 import { request as __request } from '../core/request';
 
 export class ProjectsService {
@@ -20,7 +20,7 @@ export class ProjectsService {
     public static projectsRetrieve(
         project: string,
     ): CancelablePromise<project> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}',
             path: {
@@ -63,7 +63,7 @@ export class ProjectsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects',
             query: {
@@ -97,7 +97,7 @@ export class ProjectsService {
         project: string,
         name: string,
     ): CancelablePromise<projectSetting> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/settings/{name}',
             path: {
@@ -151,7 +151,7 @@ export class ProjectsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/settings',
             path: {

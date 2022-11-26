@@ -5,7 +5,7 @@ import type { device } from '../models/device';
 import type { deviceModel } from '../models/deviceModel';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
+import { Config } from '../core/Config';
 import { request as __request } from '../core/request';
 
 export class DevicesService {
@@ -20,7 +20,7 @@ export class DevicesService {
     public static deviceModelsRetrieve(
         id: string,
     ): CancelablePromise<deviceModel> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/deviceModels/{id}',
             path: {
@@ -69,7 +69,7 @@ export class DevicesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/deviceModels',
             query: {
@@ -118,7 +118,7 @@ export class DevicesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/deviceModels/search',
             body: requestBody,
@@ -141,7 +141,7 @@ export class DevicesService {
         project: string,
         id: string,
     ): CancelablePromise<device> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/devices/{id}',
             path: {
@@ -166,7 +166,7 @@ export class DevicesService {
         project: string,
         id: string,
     ): CancelablePromise<device> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'DELETE',
             url: '/projects/{project}/devices/{id}',
             path: {
@@ -216,7 +216,7 @@ export class DevicesService {
             user?: string | null;
         },
     ): CancelablePromise<device> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'PATCH',
             url: '/projects/{project}/devices/{id}',
             path: {
@@ -267,7 +267,7 @@ export class DevicesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/devices/search',
             path: {
@@ -318,7 +318,7 @@ export class DevicesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/devices',
             path: {
@@ -366,7 +366,7 @@ export class DevicesService {
             name?: string | null;
         },
     ): CancelablePromise<device> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/devices',
             path: {

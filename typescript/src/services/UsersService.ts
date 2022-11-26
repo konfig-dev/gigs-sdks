@@ -4,7 +4,7 @@
 import type { user } from '../models/user';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
+import { Config } from '../core/Config';
 import { request as __request } from '../core/request';
 
 export class UsersService {
@@ -21,7 +21,7 @@ export class UsersService {
         project: string,
         id: string,
     ): CancelablePromise<user> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/users/{id}',
             path: {
@@ -46,7 +46,7 @@ export class UsersService {
         project: string,
         id: string,
     ): CancelablePromise<user> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'DELETE',
             url: '/projects/{project}/users/{id}',
             path: {
@@ -96,7 +96,7 @@ export class UsersService {
             preferredLocale?: string;
         },
     ): CancelablePromise<user> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'PATCH',
             url: '/projects/{project}/users/{id}',
             path: {
@@ -146,7 +146,7 @@ export class UsersService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/users/search',
             path: {
@@ -193,7 +193,7 @@ export class UsersService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/users',
             path: {
@@ -241,7 +241,7 @@ export class UsersService {
             preferredLocale?: string;
         },
     ): CancelablePromise<user> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/users',
             path: {

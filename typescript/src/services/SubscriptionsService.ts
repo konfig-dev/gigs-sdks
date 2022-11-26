@@ -4,7 +4,7 @@
 import type { subscription } from '../models/subscription';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
+import { Config } from '../core/Config';
 import { request as __request } from '../core/request';
 
 export class SubscriptionsService {
@@ -21,7 +21,7 @@ export class SubscriptionsService {
         project: string,
         id: string,
     ): CancelablePromise<subscription> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/cancel',
             path: {
@@ -47,7 +47,7 @@ export class SubscriptionsService {
         project: string,
         id: string,
     ): CancelablePromise<subscription> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/subscriptions/{id}',
             path: {
@@ -72,7 +72,7 @@ export class SubscriptionsService {
         project: string,
         id: string,
     ): CancelablePromise<subscription> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'DELETE',
             url: '/projects/{project}/subscriptions/{id}',
             path: {
@@ -98,7 +98,7 @@ export class SubscriptionsService {
         project: string,
         id: string,
     ): CancelablePromise<subscription> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/resume',
             path: {
@@ -153,7 +153,7 @@ export class SubscriptionsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/subscriptions',
             path: {
@@ -200,7 +200,7 @@ export class SubscriptionsService {
             user: string;
         },
     ): CancelablePromise<subscription> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/subscriptions',
             path: {

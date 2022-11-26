@@ -5,7 +5,7 @@ import type { plan } from '../models/plan';
 import type { planDocument } from '../models/planDocument';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
+import { Config } from '../core/Config';
 import { request as __request } from '../core/request';
 
 export class PlansService {
@@ -24,7 +24,7 @@ export class PlansService {
         plan: string,
         id: string,
     ): CancelablePromise<planDocument> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/plans/{plan}/documents/{id}',
             path: {
@@ -68,7 +68,7 @@ export class PlansService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/plans/{plan}/documents',
             path: {
@@ -93,7 +93,7 @@ export class PlansService {
         project: string,
         id: string,
     ): CancelablePromise<plan> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/plans/{id}',
             path: {
@@ -133,7 +133,7 @@ export class PlansService {
             image?: string | null;
         },
     ): CancelablePromise<plan> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'PATCH',
             url: '/projects/{project}/plans/{id}',
             path: {
@@ -170,7 +170,7 @@ export class PlansService {
         project: string,
         id: string,
     ): CancelablePromise<plan> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/plans/{id}/archive',
             path: {
@@ -205,7 +205,7 @@ export class PlansService {
         project: string,
         id: string,
     ): CancelablePromise<plan> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/plans/{id}/publish',
             path: {
@@ -259,7 +259,7 @@ export class PlansService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/plans',
             path: {

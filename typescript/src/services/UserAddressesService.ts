@@ -4,7 +4,7 @@
 import type { userAddress } from '../models/userAddress';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
+import { Config } from '../core/Config';
 import { request as __request } from '../core/request';
 
 export class UserAddressesService {
@@ -38,7 +38,7 @@ export class UserAddressesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/users/{user}/addresses',
             path: {
@@ -95,7 +95,7 @@ export class UserAddressesService {
             country: string;
         },
     ): CancelablePromise<userAddress> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/users/{user}/addresses',
             path: {
@@ -125,7 +125,7 @@ export class UserAddressesService {
         user: string,
         id: string,
     ): CancelablePromise<userAddress> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {
@@ -154,7 +154,7 @@ export class UserAddressesService {
         user: string,
         id: string,
     ): CancelablePromise<userAddress> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'DELETE',
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {

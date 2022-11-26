@@ -3,8 +3,8 @@
 /* eslint-disable */
 export { ApiError } from './core/ApiError';
 export { CancelablePromise, CancelError } from './core/CancelablePromise';
-export { OpenAPI } from './core/OpenAPI';
-export type { OpenAPIConfig } from './core/OpenAPI';
+export { Config } from './core/Config';
+export type { ConfigType } from './core/Config';
 
 export type { coverage } from './models/coverage';
 export type { device } from './models/device';

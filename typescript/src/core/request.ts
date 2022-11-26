@@ -6,7 +6,7 @@ import type { ApiRequestOptions } from './ApiRequestOptions';
 import type { ApiResult } from './ApiResult';
 import { CancelablePromise } from './CancelablePromise';
 import type { OnCancel } from './CancelablePromise';
-import type { OpenAPIConfig } from './OpenAPI';
+import type { ConfigType } from './Config';
 
 const isDefined = <T>(value: T | null | undefined): value is Exclude<T, null | undefined> => {
     return value !== undefined && value !== null;
@@ -80,7 +80,7 @@ const getQueryString = (params: Record<string, any>): string => {
     return '';
 };
 
-const getUrl = (config: OpenAPIConfig, options: ApiRequestOptions): string => {
+const getUrl = (config: ConfigType, options: ApiRequestOptions): string => {
     const encoder = config.ENCODE_PATH || encodeURI;
 
     const path = options.url
@@ -135,7 +135,7 @@ const resolve = async <T>(options: ApiRequestOptions, resolver?: T | Resolver<T>
     return resolver;
 };
 
-const getHeaders = async (config: OpenAPIConfig, options: ApiRequestOptions): Promise<Headers> => {
+const getHeaders = async (config: ConfigType, options: ApiRequestOptions): Promise<Headers> => {
     const token = await resolve(options, config.TOKEN);
     const username = await resolve(options, config.USERNAME);
     const password = await resolve(options, config.PASSWORD);
@@ -190,7 +190,7 @@ const getRequestBody = (options: ApiRequestOptions): any => {
 };
 
 export const sendRequest = async (
-    config: OpenAPIConfig,
+    config: ConfigType,
     options: ApiRequestOptions,
     url: string,
     body: any,
@@ -275,7 +275,7 @@ const catchErrorCodes = (options: ApiRequestOptions, result: ApiResult): void =>
  * @returns CancelablePromise<T>
  * @throws ApiError
  */
-export const request = <T>(config: OpenAPIConfig, options: ApiRequestOptions): CancelablePromise<T> => {
+export const request = <T>(config: ConfigType, options: ApiRequestOptions): CancelablePromise<T> => {
     return new CancelablePromise(async (resolve, reject, onCancel) => {
         try {
             const url = getUrl(config, options);

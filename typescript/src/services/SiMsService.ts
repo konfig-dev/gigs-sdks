@@ -5,7 +5,7 @@ import type { sim } from '../models/sim';
 import type { simCredentials } from '../models/simCredentials';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
+import { Config } from '../core/Config';
 import { request as __request } from '../core/request';
 
 export class SiMsService {
@@ -22,7 +22,7 @@ export class SiMsService {
         project: string,
         id: string,
     ): CancelablePromise<sim> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/sims/{id}',
             path: {
@@ -47,7 +47,7 @@ export class SiMsService {
         project: string,
         id: string,
     ): CancelablePromise<simCredentials> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/sims/{id}/credentials',
             path: {
@@ -98,7 +98,7 @@ export class SiMsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'POST',
             url: '/projects/{project}/sims/search',
             path: {
@@ -153,7 +153,7 @@ export class SiMsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/sims',
             path: {

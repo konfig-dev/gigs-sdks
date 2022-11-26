@@ -4,7 +4,7 @@
 import type { usageRecord } from '../models/usageRecord';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
+import { Config } from '../core/Config';
 import { request as __request } from '../core/request';
 
 export class UsageService {
@@ -46,7 +46,7 @@ export class UsageService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(OpenAPI, {
+        return __request(Config, {
             method: 'GET',
             url: '/projects/{project}/subscriptions/{id}/usage',
             path: {

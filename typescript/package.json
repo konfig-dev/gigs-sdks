@@ -1,0 +1,15 @@
+{
+  "name": "gigs-typescript-sdk",
+  "version": "1.0.0",
+  "description": "SDK for Gig's REST API",
+  "main": "dist/index.js",
+  "repository": "https://github.com/konfig-dev/gigs-sdks-2/tree/main/typescript",
+  "author": "gigs.com",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  }
+}

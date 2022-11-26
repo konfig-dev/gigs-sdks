@@ -5,3 +5,6 @@ generators:
     generatorVersion: 2
     copyDirectory: typescript
     npmName: gigs-typescript-sdk
+    git:
+      userId: konfig-dev
+      repoId: gigs-sdks-2/tree/main/typescript

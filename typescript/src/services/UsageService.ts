@@ -4,10 +4,11 @@
 import type { usageRecord } from '../models/usageRecord';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { Config } from '../core/Config';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class UsageService {
+
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
      * List subscription usage records
@@ -21,7 +22,7 @@ export class UsageService {
      * @returns any Returns the list of usage records.
      * @throws ApiError
      */
-    public static subscriptionUsageRecordList(
+    public subscriptionUsageRecordList(
         project: string,
         id: string,
         period?: number,
@@ -46,7 +47,7 @@ export class UsageService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/subscriptions/{id}/usage',
             path: {

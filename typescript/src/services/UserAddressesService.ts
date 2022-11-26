@@ -4,10 +4,11 @@
 import type { userAddress } from '../models/userAddress';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { Config } from '../core/Config';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class UserAddressesService {
+
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
      * List all user addresses
@@ -17,7 +18,7 @@ export class UserAddressesService {
      * @returns any Returns a list of address objects.
      * @throws ApiError
      */
-    public static userAddressesList(
+    public userAddressesList(
         project: string,
         user: string,
     ): CancelablePromise<{
@@ -38,7 +39,7 @@ export class UserAddressesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/users/{user}/addresses',
             path: {
@@ -60,7 +61,7 @@ export class UserAddressesService {
      * @returns userAddress Returns the created address.
      * @throws ApiError
      */
-    public static userAddressesCreate(
+    public userAddressesCreate(
         project: string,
         user: string,
         requestBody: {
@@ -95,7 +96,7 @@ export class UserAddressesService {
             country: string;
         },
     ): CancelablePromise<userAddress> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/users/{user}/addresses',
             path: {
@@ -120,12 +121,12 @@ export class UserAddressesService {
      * @returns userAddress Returns the address if it exists and is owned by the user.
      * @throws ApiError
      */
-    public static userAddressesRetrieve(
+    public userAddressesRetrieve(
         project: string,
         user: string,
         id: string,
     ): CancelablePromise<userAddress> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {
@@ -149,12 +150,12 @@ export class UserAddressesService {
      * @returns userAddress Returns the address after a successful deletion.
      * @throws ApiError
      */
-    public static userAddressesDelete(
+    public userAddressesDelete(
         project: string,
         user: string,
         id: string,
     ): CancelablePromise<userAddress> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {

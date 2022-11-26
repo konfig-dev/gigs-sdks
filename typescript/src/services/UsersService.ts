@@ -4,10 +4,11 @@
 import type { user } from '../models/user';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { Config } from '../core/Config';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class UsersService {
+
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
      * Retrieve a user
@@ -17,11 +18,11 @@ export class UsersService {
      * @returns user Returns the user object if the user exists.
      * @throws ApiError
      */
-    public static usersRetrieve(
+    public usersRetrieve(
         project: string,
         id: string,
     ): CancelablePromise<user> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/users/{id}',
             path: {
@@ -42,11 +43,11 @@ export class UsersService {
      * @returns user Returns the user after a successful deletion.
      * @throws ApiError
      */
-    public static usersDelete(
+    public usersDelete(
         project: string,
         id: string,
     ): CancelablePromise<user> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/projects/{project}/users/{id}',
             path: {
@@ -69,7 +70,7 @@ export class UsersService {
      * @returns user Returns the updated user.
      * @throws ApiError
      */
-    public static usersUpdate(
+    public usersUpdate(
         project: string,
         id: string,
         requestBody: {
@@ -96,7 +97,7 @@ export class UsersService {
             preferredLocale?: string;
         },
     ): CancelablePromise<user> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'PATCH',
             url: '/projects/{project}/users/{id}',
             path: {
@@ -120,7 +121,7 @@ export class UsersService {
      * @returns any Returns the users matching the search criteria.
      * @throws ApiError
      */
-    public static usersSearch(
+    public usersSearch(
         project: string,
         requestBody: {
             /**
@@ -146,7 +147,7 @@ export class UsersService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/users/search',
             path: {
@@ -170,7 +171,7 @@ export class UsersService {
      * @returns any Returns a dictionary with an items property that contains an array of user objects.
      * @throws ApiError
      */
-    public static usersList(
+    public usersList(
         project: string,
         after?: string,
         before?: string,
@@ -193,7 +194,7 @@ export class UsersService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/users',
             path: {
@@ -215,7 +216,7 @@ export class UsersService {
      * @returns user Returns the created user.
      * @throws ApiError
      */
-    public static usersCreate(
+    public usersCreate(
         project: string,
         requestBody: {
             /**
@@ -241,7 +242,7 @@ export class UsersService {
             preferredLocale?: string;
         },
     ): CancelablePromise<user> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/users',
             path: {

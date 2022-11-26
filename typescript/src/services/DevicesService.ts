@@ -5,10 +5,11 @@ import type { device } from '../models/device';
 import type { deviceModel } from '../models/deviceModel';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { Config } from '../core/Config';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class DevicesService {
+
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
      * Retrieve a device model
@@ -17,10 +18,10 @@ export class DevicesService {
      * @returns deviceModel Returns the device model object if it exists.
      * @throws ApiError
      */
-    public static deviceModelsRetrieve(
+    public deviceModelsRetrieve(
         id: string,
     ): CancelablePromise<deviceModel> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/deviceModels/{id}',
             path: {
@@ -44,7 +45,7 @@ export class DevicesService {
      * @returns any Returns a dictionary with an items property that contains an array of device models.
      * @throws ApiError
      */
-    public static deviceModelsList(
+    public deviceModelsList(
         type?: Array<'car' | 'iot' | 'laptop' | 'router' | 'smartphone' | 'feature-phone' | 'smartwatch' | 'tablet' | 'wearable' | 'other'>,
         brand?: Array<string>,
         simType?: Array<'eSIM' | 'pSIM'>,
@@ -69,7 +70,7 @@ export class DevicesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/deviceModels',
             query: {
@@ -93,7 +94,7 @@ export class DevicesService {
      * @returns any Returns a list schema response with all found device models.
      * @throws ApiError
      */
-    public static deviceModelsSearch(
+    public deviceModelsSearch(
         requestBody: {
             /**
              * The IMEI (international mobile equipment identity) of the corresponding device.
@@ -118,7 +119,7 @@ export class DevicesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/deviceModels/search',
             body: requestBody,
@@ -137,11 +138,11 @@ export class DevicesService {
      * @returns device Returns the device object if it exists.
      * @throws ApiError
      */
-    public static devicesRetrieve(
+    public devicesRetrieve(
         project: string,
         id: string,
     ): CancelablePromise<device> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/devices/{id}',
             path: {
@@ -162,11 +163,11 @@ export class DevicesService {
      * @returns device Returns the device after a successful deletion.
      * @throws ApiError
      */
-    public static devicesDelete(
+    public devicesDelete(
         project: string,
         id: string,
     ): CancelablePromise<device> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/projects/{project}/devices/{id}',
             path: {
@@ -198,7 +199,7 @@ export class DevicesService {
      * @returns device Returns the updated device object.
      * @throws ApiError
      */
-    public static devicesUpdate(
+    public devicesUpdate(
         project: string,
         id: string,
         requestBody: {
@@ -216,7 +217,7 @@ export class DevicesService {
             user?: string | null;
         },
     ): CancelablePromise<device> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'PATCH',
             url: '/projects/{project}/devices/{id}',
             path: {
@@ -241,7 +242,7 @@ export class DevicesService {
      * @returns any Returns a list schema response with all found devices.
      * @throws ApiError
      */
-    public static devicesSearch(
+    public devicesSearch(
         project: string,
         requestBody: {
             /**
@@ -267,7 +268,7 @@ export class DevicesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/devices/search',
             path: {
@@ -293,7 +294,7 @@ export class DevicesService {
      * @returns any Returns a dictionary with an items property that contains an array of devices.
      * @throws ApiError
      */
-    public static devicesList(
+    public devicesList(
         project: string,
         sim?: string,
         user?: string,
@@ -318,7 +319,7 @@ export class DevicesService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/devices',
             path: {
@@ -345,7 +346,7 @@ export class DevicesService {
      * @returns device Returns the created device.
      * @throws ApiError
      */
-    public static devicesCreate(
+    public devicesCreate(
         project: string,
         requestBody: {
             /**
@@ -366,7 +367,7 @@ export class DevicesService {
             name?: string | null;
         },
     ): CancelablePromise<device> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/devices',
             path: {

@@ -5,10 +5,11 @@ import type { sim } from '../models/sim';
 import type { simCredentials } from '../models/simCredentials';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { Config } from '../core/Config';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class SiMsService {
+
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
      * Retrieve a SIM
@@ -18,11 +19,11 @@ export class SiMsService {
      * @returns sim Returns the SIM if it exists.
      * @throws ApiError
      */
-    public static siMsRetrieve(
+    public siMsRetrieve(
         project: string,
         id: string,
     ): CancelablePromise<sim> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/sims/{id}',
             path: {
@@ -43,11 +44,11 @@ export class SiMsService {
      * @returns simCredentials Returns the SIM credentials.
      * @throws ApiError
      */
-    public static siMsCredentialsRetrieve(
+    public siMsCredentialsRetrieve(
         project: string,
         id: string,
     ): CancelablePromise<simCredentials> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/sims/{id}/credentials',
             path: {
@@ -68,7 +69,7 @@ export class SiMsService {
      * @returns any Returns a list schema response with all found SIMs.
      * @throws ApiError
      */
-    public static siMsSearch(
+    public siMsSearch(
         project: string,
         requestBody: {
             /**
@@ -98,7 +99,7 @@ export class SiMsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/sims/search',
             path: {
@@ -126,7 +127,7 @@ export class SiMsService {
      * @returns any Returns a dictionary with an items property that contains an array of SIMs.
      * @throws ApiError
      */
-    public static siMsList(
+    public siMsList(
         project: string,
         provider?: Array<string>,
         status?: Array<'inactive' | 'active' | 'retired'>,
@@ -153,7 +154,7 @@ export class SiMsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/sims',
             path: {

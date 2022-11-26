@@ -5,10 +5,11 @@ import type { project } from '../models/project';
 import type { projectSetting } from '../models/projectSetting';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { Config } from '../core/Config';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class ProjectsService {
+
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
      * Retrieve a project
@@ -17,10 +18,10 @@ export class ProjectsService {
      * @returns project Returns the project object if it exists.
      * @throws ApiError
      */
-    public static projectsRetrieve(
+    public projectsRetrieve(
         project: string,
     ): CancelablePromise<project> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}',
             path: {
@@ -41,7 +42,7 @@ export class ProjectsService {
      * @returns any Returns a dictionary with an items property that contains an array of projects.
      * @throws ApiError
      */
-    public static projectsList(
+    public projectsList(
         after?: string,
         before?: string,
         limit: number = 10,
@@ -63,7 +64,7 @@ export class ProjectsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects',
             query: {
@@ -93,11 +94,11 @@ export class ProjectsService {
      * @returns projectSetting Returns the project setting object if it exists.
      * @throws ApiError
      */
-    public static projectSettingsRetrieve(
+    public projectSettingsRetrieve(
         project: string,
         name: string,
     ): CancelablePromise<projectSetting> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/settings/{name}',
             path: {
@@ -128,7 +129,7 @@ export class ProjectsService {
      * @returns any Returns a list of project setting objects.
      * @throws ApiError
      */
-    public static projectSettingsList(
+    public projectSettingsList(
         project: string,
         after?: string,
         before?: string,
@@ -151,7 +152,7 @@ export class ProjectsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/settings',
             path: {

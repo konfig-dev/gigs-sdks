@@ -4,10 +4,11 @@
 import type { subscription } from '../models/subscription';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { Config } from '../core/Config';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class SubscriptionsService {
+
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
      * Cancel an active subscription
@@ -17,11 +18,11 @@ export class SubscriptionsService {
      * @returns subscription Returns the subscription after a successful cancellation.
      * @throws ApiError
      */
-    public static subscriptionsCancel(
+    public subscriptionsCancel(
         project: string,
         id: string,
     ): CancelablePromise<subscription> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/cancel',
             path: {
@@ -43,11 +44,11 @@ export class SubscriptionsService {
      * @returns subscription Returns the subscription if it exists.
      * @throws ApiError
      */
-    public static subscriptionsRetrieve(
+    public subscriptionsRetrieve(
         project: string,
         id: string,
     ): CancelablePromise<subscription> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/subscriptions/{id}',
             path: {
@@ -68,11 +69,11 @@ export class SubscriptionsService {
      * @returns subscription Returns the ended subscription after a successful termination.
      * @throws ApiError
      */
-    public static subscriptionsEnd(
+    public subscriptionsEnd(
         project: string,
         id: string,
     ): CancelablePromise<subscription> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/projects/{project}/subscriptions/{id}',
             path: {
@@ -94,11 +95,11 @@ export class SubscriptionsService {
      * @returns subscription Returns the resumed subscription.
      * @throws ApiError
      */
-    public static subscriptionsResume(
+    public subscriptionsResume(
         project: string,
         id: string,
     ): CancelablePromise<subscription> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/resume',
             path: {
@@ -126,7 +127,7 @@ export class SubscriptionsService {
      * @returns any Returns a list of subscription objects.
      * @throws ApiError
      */
-    public static subscriptionsList(
+    public subscriptionsList(
         project: string,
         user?: string,
         plan?: string,
@@ -153,7 +154,7 @@ export class SubscriptionsService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/subscriptions',
             path: {
@@ -179,7 +180,7 @@ export class SubscriptionsService {
      * @returns subscription Returns the newly created subscription and supporting objects.
      * @throws ApiError
      */
-    public static subscriptionsCreate(
+    public subscriptionsCreate(
         project: string,
         requestBody: {
             /**
@@ -200,7 +201,7 @@ export class SubscriptionsService {
             user: string;
         },
     ): CancelablePromise<subscription> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/subscriptions',
             path: {

@@ -5,10 +5,11 @@ import type { plan } from '../models/plan';
 import type { planDocument } from '../models/planDocument';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { Config } from '../core/Config';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class PlansService {
+
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
      * Retrieve a plan document
@@ -19,12 +20,12 @@ export class PlansService {
      * @returns planDocument Returns the plan if it exists and is owned by the plan.
      * @throws ApiError
      */
-    public static planDocumentRetrieve(
+    public planDocumentRetrieve(
         project: string,
         plan: string,
         id: string,
     ): CancelablePromise<planDocument> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/plans/{plan}/documents/{id}',
             path: {
@@ -47,7 +48,7 @@ export class PlansService {
      * @returns any Returns a list of document objects.
      * @throws ApiError
      */
-    public static planDocumentsList(
+    public planDocumentsList(
         project: string,
         plan: string,
     ): CancelablePromise<{
@@ -68,7 +69,7 @@ export class PlansService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/plans/{plan}/documents',
             path: {
@@ -89,11 +90,11 @@ export class PlansService {
      * @returns plan Returns the plan if it exists.
      * @throws ApiError
      */
-    public static plansRetrieve(
+    public plansRetrieve(
         project: string,
         id: string,
     ): CancelablePromise<plan> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/plans/{id}',
             path: {
@@ -115,7 +116,7 @@ export class PlansService {
      * @returns plan Returns the updated plan.
      * @throws ApiError
      */
-    public static plansUpdate(
+    public plansUpdate(
         project: string,
         id: string,
         requestBody: {
@@ -133,7 +134,7 @@ export class PlansService {
             image?: string | null;
         },
     ): CancelablePromise<plan> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'PATCH',
             url: '/projects/{project}/plans/{id}',
             path: {
@@ -166,11 +167,11 @@ export class PlansService {
      * @returns plan Returns the archived plan.
      * @throws ApiError
      */
-    public static plansArchive(
+    public plansArchive(
         project: string,
         id: string,
     ): CancelablePromise<plan> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/plans/{id}/archive',
             path: {
@@ -201,11 +202,11 @@ export class PlansService {
      * @returns plan Returns the available plan.
      * @throws ApiError
      */
-    public static plansPublish(
+    public plansPublish(
         project: string,
         id: string,
     ): CancelablePromise<plan> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/plans/{id}/publish',
             path: {
@@ -233,7 +234,7 @@ export class PlansService {
      * @returns any Returns a list of plan objects.
      * @throws ApiError
      */
-    public static plansList(
+    public plansList(
         project: string,
         provider?: Array<string>,
         simType?: Array<'eSIM' | 'pSIM'>,
@@ -259,7 +260,7 @@ export class PlansService {
          */
         moreItemsBefore: string | null;
     }> {
-        return __request(Config, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/plans',
             path: {

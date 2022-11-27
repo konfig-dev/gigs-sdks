@@ -14,13 +14,17 @@ export class DevicesService {
     /**
      * Retrieve a device model
      * Retrieves the details of an existing device model.
-     * @param id The unique identifier for the device model.
      * @returns deviceModel Returns the device model object if it exists.
      * @throws ApiError
      */
-    public deviceModelsRetrieve(
+    public deviceModelsRetrieve({
+        id,
+    }: {
+        /**
+         * The unique identifier for the device model.
+         */
         id: string,
-    ): CancelablePromise<deviceModel> {
+    }): CancelablePromise<deviceModel> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/deviceModels/{id}',
@@ -36,23 +40,42 @@ export class DevicesService {
     /**
      * List all device models
      * Returns a list of device models. The models returned are sorted by creation date, with the most recently created models appearing first.
-     * @param type A comma-separated list of types to be filtered by.
-     * @param brand A comma-separated list of brands to be filtered by.
-     * @param simType A comma-separated list of SIM types to be filtered by.
-     * @param after A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
-     * @param before A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
-     * @param limit The limit of items to be returned in the list, between 0 and 200.
      * @returns any Returns a dictionary with an items property that contains an array of device models.
      * @throws ApiError
      */
-    public deviceModelsList(
+    public deviceModelsList({
+        type,
+        brand,
+        simType,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * A comma-separated list of types to be filtered by.
+         */
         type?: Array<'car' | 'iot' | 'laptop' | 'router' | 'smartphone' | 'feature-phone' | 'smartwatch' | 'tablet' | 'wearable' | 'other'>,
+        /**
+         * A comma-separated list of brands to be filtered by.
+         */
         brand?: Array<string>,
+        /**
+         * A comma-separated list of SIM types to be filtered by.
+         */
         simType?: Array<'eSIM' | 'pSIM'>,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
         after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
         before?: string,
-        limit: number = 10,
-    ): CancelablePromise<{
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -90,18 +113,22 @@ export class DevicesService {
     /**
      * Search for device models
      * Searches for existing devices models matching the given parameters.
-     * @param requestBody Device model attributes to search for.
      * @returns any Returns a list schema response with all found device models.
      * @throws ApiError
      */
-    public deviceModelsSearch(
+    public deviceModelsSearch({
+        requestBody,
+    }: {
+        /**
+         * Device model attributes to search for.
+         */
         requestBody: {
             /**
              * The IMEI (international mobile equipment identity) of the corresponding device.
              */
             imei: string;
         },
-    ): CancelablePromise<{
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -133,15 +160,22 @@ export class DevicesService {
     /**
      * Retrieve a device
      * Retrieves the details of an existing device owned by the authenticated user.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the device.
      * @returns device Returns the device object if it exists.
      * @throws ApiError
      */
-    public devicesRetrieve(
+    public devicesRetrieve({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the device.
+         */
         id: string,
-    ): CancelablePromise<device> {
+    }): CancelablePromise<device> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/devices/{id}',
@@ -158,15 +192,22 @@ export class DevicesService {
     /**
      * Delete a device
      * Retrieves the details of an existing device and deletes it.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the device.
      * @returns device Returns the device after a successful deletion.
      * @throws ApiError
      */
-    public devicesDelete(
+    public devicesDelete({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the device.
+         */
         id: string,
-    ): CancelablePromise<device> {
+    }): CancelablePromise<device> {
         return this.httpRequest.request({
             method: 'DELETE',
             url: '/projects/{project}/devices/{id}',
@@ -193,15 +234,25 @@ export class DevicesService {
      * > We’re excited to hear your feedback and ideas. Please send an email
      * > to [support@gigs.com](mailto:support@gigs.com) to share your thoughts.
      *
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the device.
-     * @param requestBody The device properties to update, at least one of them must be provided. Use null or an empty array to remove existing values.
      * @returns device Returns the updated device object.
      * @throws ApiError
      */
-    public devicesUpdate(
+    public devicesUpdate({
+        project,
+        id,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the device.
+         */
         id: string,
+        /**
+         * The device properties to update, at least one of them must be provided. Use null or an empty array to remove existing values.
+         */
         requestBody: {
             /**
              * An optional custom name for the device.
@@ -216,7 +267,7 @@ export class DevicesService {
              */
             user?: string | null;
         },
-    ): CancelablePromise<device> {
+    }): CancelablePromise<device> {
         return this.httpRequest.request({
             method: 'PATCH',
             url: '/projects/{project}/devices/{id}',
@@ -237,20 +288,27 @@ export class DevicesService {
     /**
      * Search for devices
      * Searches for existing devices matching the given parameters. The search will only return factory devices not yet assigned to any user, or devices already owned by the current user.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param requestBody Device attributes to search for.
      * @returns any Returns a list schema response with all found devices.
      * @throws ApiError
      */
-    public devicesSearch(
+    public devicesSearch({
+        project,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * Device attributes to search for.
+         */
         requestBody: {
             /**
              * The IMEI (international mobile equipment identity) of the device.
              */
             imei: string;
         },
-    ): CancelablePromise<{
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -285,23 +343,42 @@ export class DevicesService {
     /**
      * List all devices
      * Returns a list of devices. The devices returned are sorted by creation date, with the most recently created devices appearing first.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param sim The unique identifier for the sim to be filtered by.
-     * @param user The unique identifier for the user to be filtered by.
-     * @param after A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
-     * @param before A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
-     * @param limit The limit of items to be returned in the list, between 0 and 200.
      * @returns any Returns a dictionary with an items property that contains an array of devices.
      * @throws ApiError
      */
-    public devicesList(
+    public devicesList({
+        project,
+        sim,
+        user,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the sim to be filtered by.
+         */
         sim?: string,
+        /**
+         * The unique identifier for the user to be filtered by.
+         */
         user?: string,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
         after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
         before?: string,
-        limit: number = 10,
-    ): CancelablePromise<{
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -341,13 +418,20 @@ export class DevicesService {
     /**
      * Create a device
      * Creates a new device with the given parameters.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param requestBody Device attributes to create. You must specify either an IMEI or a user.
      * @returns device Returns the created device.
      * @throws ApiError
      */
-    public devicesCreate(
+    public devicesCreate({
+        project,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * Device attributes to create. You must specify either an IMEI or a user.
+         */
         requestBody: {
             /**
              * The IMEI (international mobile equipment identity) of the device.
@@ -366,7 +450,7 @@ export class DevicesService {
              */
             name?: string | null;
         },
-    ): CancelablePromise<device> {
+    }): CancelablePromise<device> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/devices',

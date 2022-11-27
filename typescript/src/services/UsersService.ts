@@ -13,15 +13,22 @@ export class UsersService {
     /**
      * Retrieve a user
      * Retrieves the details of an existing user. You need only supply the unique user identifier that was returned upon user creation.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the user.
      * @returns user Returns the user object if the user exists.
      * @throws ApiError
      */
-    public usersRetrieve(
+    public usersRetrieve({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the user.
+         */
         id: string,
-    ): CancelablePromise<user> {
+    }): CancelablePromise<user> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/users/{id}',
@@ -38,15 +45,22 @@ export class UsersService {
     /**
      * Delete a user
      * Retrieves the details of an existing user and deletes it.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the user.
      * @returns user Returns the user after a successful deletion.
      * @throws ApiError
      */
-    public usersDelete(
+    public usersDelete({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the user.
+         */
         id: string,
-    ): CancelablePromise<user> {
+    }): CancelablePromise<user> {
         return this.httpRequest.request({
             method: 'DELETE',
             url: '/projects/{project}/users/{id}',
@@ -64,15 +78,25 @@ export class UsersService {
     /**
      * Update a user
      * Updates the specified user by setting the values of the parameters passed.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the user.
-     * @param requestBody User attributes to update.
      * @returns user Returns the updated user.
      * @throws ApiError
      */
-    public usersUpdate(
+    public usersUpdate({
+        project,
+        id,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the user.
+         */
         id: string,
+        /**
+         * User attributes to update.
+         */
         requestBody: {
             /**
              * Type of object is always `user`.
@@ -96,7 +120,7 @@ export class UsersService {
              */
             preferredLocale?: string;
         },
-    ): CancelablePromise<user> {
+    }): CancelablePromise<user> {
         return this.httpRequest.request({
             method: 'PATCH',
             url: '/projects/{project}/users/{id}',
@@ -116,20 +140,27 @@ export class UsersService {
     /**
      * Search for users
      * Searches for existing users matching the given parameters.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param requestBody User attributes to search by.
      * @returns any Returns the users matching the search criteria.
      * @throws ApiError
      */
-    public usersSearch(
+    public usersSearch({
+        project,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * User attributes to search by.
+         */
         requestBody: {
             /**
              * The primary email address of the user.
              */
             email: string;
         },
-    ): CancelablePromise<{
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -164,19 +195,32 @@ export class UsersService {
     /**
      * List all users
      * Returns a list of users. The users returned are sorted by creation date, with the most recently created users appearing first.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param after A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
-     * @param before A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
-     * @param limit The limit of items to be returned in the list, between 0 and 200.
      * @returns any Returns a dictionary with an items property that contains an array of user objects.
      * @throws ApiError
      */
-    public usersList(
+    public usersList({
+        project,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
         after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
         before?: string,
-        limit: number = 10,
-    ): CancelablePromise<{
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -211,13 +255,20 @@ export class UsersService {
     /**
      * Create a user
      * Creates a new user with the given parameters.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param requestBody User attributes to create.
      * @returns user Returns the created user.
      * @throws ApiError
      */
-    public usersCreate(
+    public usersCreate({
+        project,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * User attributes to create.
+         */
         requestBody: {
             /**
              * Type of object is always `user`.
@@ -241,7 +292,7 @@ export class UsersService {
              */
             preferredLocale?: string;
         },
-    ): CancelablePromise<user> {
+    }): CancelablePromise<user> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/users',

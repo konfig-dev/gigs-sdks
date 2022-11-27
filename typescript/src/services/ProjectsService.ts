@@ -14,13 +14,17 @@ export class ProjectsService {
     /**
      * Retrieve a project
      * Retrieves the details of an existing project accessible by the API client.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
      * @returns project Returns the project object if it exists.
      * @throws ApiError
      */
-    public projectsRetrieve(
+    public projectsRetrieve({
+        project,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
-    ): CancelablePromise<project> {
+    }): CancelablePromise<project> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}',
@@ -36,17 +40,27 @@ export class ProjectsService {
     /**
      * List all projects
      * Returns a list of projects. The projects returned are sorted by creation date, with the most recently created projects appearing first.
-     * @param after A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
-     * @param before A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
-     * @param limit The limit of items to be returned in the list, between 0 and 200.
      * @returns any Returns a dictionary with an items property that contains an array of projects.
      * @throws ApiError
      */
-    public projectsList(
+    public projectsList({
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
         after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
         before?: string,
-        limit: number = 10,
-    ): CancelablePromise<{
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -89,15 +103,22 @@ export class ProjectsService {
      * > We’re excited to hear your feedback and ideas. Please send an email
      * > to [support@gigs.com](mailto:support@gigs.com) to share your thoughts.
      *
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param name The unique identifier of the application the project setting applies to.
      * @returns projectSetting Returns the project setting object if it exists.
      * @throws ApiError
      */
-    public projectSettingsRetrieve(
+    public projectSettingsRetrieve({
+        project,
+        name,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier of the application the project setting applies to.
+         */
         name: string,
-    ): CancelablePromise<projectSetting> {
+    }): CancelablePromise<projectSetting> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/settings/{name}',
@@ -122,19 +143,32 @@ export class ProjectsService {
      * > We’re excited to hear your feedback and ideas. Please send an email
      * > to [support@gigs.com](mailto:support@gigs.com) to share your thoughts.
      *
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param after A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
-     * @param before A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
-     * @param limit The limit of items to be returned in the list, between 0 and 200.
      * @returns any Returns a list of project setting objects.
      * @throws ApiError
      */
-    public projectSettingsList(
+    public projectSettingsList({
+        project,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
         after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
         before?: string,
-        limit: number = 10,
-    ): CancelablePromise<{
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */

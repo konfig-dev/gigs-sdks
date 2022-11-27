@@ -14,17 +14,27 @@ export class PlansService {
     /**
      * Retrieve a plan document
      * Retrieves the details of an existing document for a given plan.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param plan The unique identifier for the plan.
-     * @param id The unique identifier for the document.
      * @returns planDocument Returns the plan if it exists and is owned by the plan.
      * @throws ApiError
      */
-    public planDocumentRetrieve(
+    public planDocumentRetrieve({
+        project,
+        plan,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the plan.
+         */
         plan: string,
+        /**
+         * The unique identifier for the document.
+         */
         id: string,
-    ): CancelablePromise<planDocument> {
+    }): CancelablePromise<planDocument> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/plans/{plan}/documents/{id}',
@@ -43,15 +53,22 @@ export class PlansService {
     /**
      * List all plan documents
      * Returns a list of documents related to the given plan. The documents returned are sorted by creation date, with the most recently created documents appearing first.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param plan The unique identifier for the plan.
      * @returns any Returns a list of document objects.
      * @throws ApiError
      */
-    public planDocumentsList(
+    public planDocumentsList({
+        project,
+        plan,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the plan.
+         */
         plan: string,
-    ): CancelablePromise<{
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -85,15 +102,22 @@ export class PlansService {
     /**
      * Retrieve a plan
      * Retrieve the details of an existing plan.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the plan.
      * @returns plan Returns the plan if it exists.
      * @throws ApiError
      */
-    public plansRetrieve(
+    public plansRetrieve({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the plan.
+         */
         id: string,
-    ): CancelablePromise<plan> {
+    }): CancelablePromise<plan> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/plans/{id}',
@@ -110,15 +134,25 @@ export class PlansService {
     /**
      * Update a plan
      * Updates the specified plan by setting the values of the parameters passed.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the plan.
-     * @param requestBody Plan attributes to update.
      * @returns plan Returns the updated plan.
      * @throws ApiError
      */
-    public plansUpdate(
+    public plansUpdate({
+        project,
+        id,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the plan.
+         */
         id: string,
+        /**
+         * Plan attributes to update.
+         */
         requestBody: {
             /**
              * The plan's name, meant to be displayable to the users.
@@ -133,7 +167,7 @@ export class PlansService {
              */
             image?: string | null;
         },
-    ): CancelablePromise<plan> {
+    }): CancelablePromise<plan> {
         return this.httpRequest.request({
             method: 'PATCH',
             url: '/projects/{project}/plans/{id}',
@@ -162,15 +196,22 @@ export class PlansService {
      * > We’re excited to hear your feedback and ideas. Please send an email
      * > to [support@gigs.com](mailto:support@gigs.com) to share your thoughts.
      *
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the plan.
      * @returns plan Returns the archived plan.
      * @throws ApiError
      */
-    public plansArchive(
+    public plansArchive({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the plan.
+         */
         id: string,
-    ): CancelablePromise<plan> {
+    }): CancelablePromise<plan> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/plans/{id}/archive',
@@ -197,15 +238,22 @@ export class PlansService {
      * > We’re excited to hear your feedback and ideas. Please send an email
      * > to [support@gigs.com](mailto:support@gigs.com) to share your thoughts.
      *
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the plan.
      * @returns plan Returns the available plan.
      * @throws ApiError
      */
-    public plansPublish(
+    public plansPublish({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the plan.
+         */
         id: string,
-    ): CancelablePromise<plan> {
+    }): CancelablePromise<plan> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/plans/{id}/publish',
@@ -224,25 +272,47 @@ export class PlansService {
     /**
      * List all plans
      * Returns a list of plans.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param provider The network provider ID to filter the plans by.
-     * @param simType The type of SIM card to filter the plans by.
-     * @param status The status to filter the plans by. Only available plans are returned by default.
-     * @param after A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
-     * @param before A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
-     * @param limit The limit of items to be returned in the list, between 0 and 200.
      * @returns any Returns a list of plan objects.
      * @throws ApiError
      */
-    public plansList(
+    public plansList({
+        project,
+        provider,
+        simType,
+        status,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The network provider ID to filter the plans by.
+         */
         provider?: Array<string>,
+        /**
+         * The type of SIM card to filter the plans by.
+         */
         simType?: Array<'eSIM' | 'pSIM'>,
+        /**
+         * The status to filter the plans by. Only available plans are returned by default.
+         */
         status?: Array<'available' | 'archived' | 'pending' | 'draft'>,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
         after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
         before?: string,
-        limit: number = 10,
-    ): CancelablePromise<{
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */

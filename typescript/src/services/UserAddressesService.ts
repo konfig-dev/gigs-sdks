@@ -13,15 +13,22 @@ export class UserAddressesService {
     /**
      * List all user addresses
      * Returns a list of addresses owned by the given user. The addresses returned are sorted by creation date, with the most recently created addresses appearing first.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param user The unique identifier for the user.
      * @returns any Returns a list of address objects.
      * @throws ApiError
      */
-    public userAddressesList(
+    public userAddressesList({
+        project,
+        user,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the user.
+         */
         user: string,
-    ): CancelablePromise<{
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -55,15 +62,25 @@ export class UserAddressesService {
     /**
      * Create a user address
      * Create a new address for the given user with the given parameters.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param user The unique identifier for the user.
-     * @param requestBody User address attributes to create.
      * @returns userAddress Returns the created address.
      * @throws ApiError
      */
-    public userAddressesCreate(
+    public userAddressesCreate({
+        project,
+        user,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the user.
+         */
         user: string,
+        /**
+         * User address attributes to create.
+         */
         requestBody: {
             /**
              * Type of object is always `userAddress`.
@@ -95,7 +112,7 @@ export class UserAddressesService {
              */
             country: string;
         },
-    ): CancelablePromise<userAddress> {
+    }): CancelablePromise<userAddress> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/users/{user}/addresses',
@@ -115,17 +132,27 @@ export class UserAddressesService {
     /**
      * Retrieve a user address
      * Retrieves the details of an existing address for a given user.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param user The unique identifier for the user.
-     * @param id The unique identifier for the address.
      * @returns userAddress Returns the address if it exists and is owned by the user.
      * @throws ApiError
      */
-    public userAddressesRetrieve(
+    public userAddressesRetrieve({
+        project,
+        user,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the user.
+         */
         user: string,
+        /**
+         * The unique identifier for the address.
+         */
         id: string,
-    ): CancelablePromise<userAddress> {
+    }): CancelablePromise<userAddress> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/users/{user}/addresses/{id}',
@@ -144,17 +171,27 @@ export class UserAddressesService {
     /**
      * Delete a user address
      * Retrieves the details of an existing user address and deletes it.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param user The unique identifier for the user.
-     * @param id The unique identifier for the address.
      * @returns userAddress Returns the address after a successful deletion.
      * @throws ApiError
      */
-    public userAddressesDelete(
+    public userAddressesDelete({
+        project,
+        user,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the user.
+         */
         user: string,
+        /**
+         * The unique identifier for the address.
+         */
         id: string,
-    ): CancelablePromise<userAddress> {
+    }): CancelablePromise<userAddress> {
         return this.httpRequest.request({
             method: 'DELETE',
             url: '/projects/{project}/users/{user}/addresses/{id}',

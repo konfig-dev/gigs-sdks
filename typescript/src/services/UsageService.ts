@@ -13,23 +13,42 @@ export class UsageService {
     /**
      * List subscription usage records
      * Lists usage records in ascending order for a subscription, defaulting to `daily` aggregation for the latest subscription period.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the subscription.
-     * @param period Limits the usage data returned to the subscription period provided. This option is incompatible with the `start` and `end` parameters.
-     * @param start Limits the usage data to dates greater than or equal to the provided date. Can only be used in combination with `end`.
-     * @param end Limits the usage data to dates up to and including the provided date. Can only be used in combination with `start`.
-     * @param aggregation Determines the aggregation method used, defaulting to `daily`. `period` provides a single aggregated value for the time range or period requested.
      * @returns any Returns the list of usage records.
      * @throws ApiError
      */
-    public subscriptionUsageRecordList(
+    public subscriptionUsageRecordList({
+        project,
+        id,
+        period,
+        start,
+        end,
+        aggregation,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the subscription.
+         */
         id: string,
+        /**
+         * Limits the usage data returned to the subscription period provided. This option is incompatible with the `start` and `end` parameters.
+         */
         period?: number,
+        /**
+         * Limits the usage data to dates greater than or equal to the provided date. Can only be used in combination with `end`.
+         */
         start?: string,
+        /**
+         * Limits the usage data to dates up to and including the provided date. Can only be used in combination with `start`.
+         */
         end?: string,
+        /**
+         * Determines the aggregation method used, defaulting to `daily`. `period` provides a single aggregated value for the time range or period requested.
+         */
         aggregation?: 'daily' | 'period',
-    ): CancelablePromise<{
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */

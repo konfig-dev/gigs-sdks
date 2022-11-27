@@ -13,15 +13,22 @@ export class SubscriptionsService {
     /**
      * Cancel an active subscription
      * Retrieves the details of an existing subscription and schedules termination of the plan at the end of the next renewal date. You need only supply the unique subscription identifier that was returned upon purchasing a plan.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the subscription.
      * @returns subscription Returns the subscription after a successful cancellation.
      * @throws ApiError
      */
-    public subscriptionsCancel(
+    public subscriptionsCancel({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the subscription.
+         */
         id: string,
-    ): CancelablePromise<subscription> {
+    }): CancelablePromise<subscription> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/cancel',
@@ -39,15 +46,22 @@ export class SubscriptionsService {
     /**
      * Retrieve a subscription
      * Retrieves the details of an existing subscription. You need only supply the unique subscription identifier that was returned upon purchasing a plan.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the subscription.
      * @returns subscription Returns the subscription if it exists.
      * @throws ApiError
      */
-    public subscriptionsRetrieve(
+    public subscriptionsRetrieve({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the subscription.
+         */
         id: string,
-    ): CancelablePromise<subscription> {
+    }): CancelablePromise<subscription> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/subscriptions/{id}',
@@ -64,15 +78,22 @@ export class SubscriptionsService {
     /**
      * End an active subscription
      * Ends an active plan subscription immediately. You only need to supply the unique subscription identifier that was returned upon purchasing a plan.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the subscription.
      * @returns subscription Returns the ended subscription after a successful termination.
      * @throws ApiError
      */
-    public subscriptionsEnd(
+    public subscriptionsEnd({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the subscription.
+         */
         id: string,
-    ): CancelablePromise<subscription> {
+    }): CancelablePromise<subscription> {
         return this.httpRequest.request({
             method: 'DELETE',
             url: '/projects/{project}/subscriptions/{id}',
@@ -90,15 +111,22 @@ export class SubscriptionsService {
     /**
      * Resume a canceled subscription
      * Removes the cancellation and end times of the subscription. The subscription will continue to auto-renew until canceled again.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the subscription.
      * @returns subscription Returns the resumed subscription.
      * @throws ApiError
      */
-    public subscriptionsResume(
+    public subscriptionsResume({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the subscription.
+         */
         id: string,
-    ): CancelablePromise<subscription> {
+    }): CancelablePromise<subscription> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/resume',
@@ -116,27 +144,52 @@ export class SubscriptionsService {
     /**
      * List all subscriptions
      * Returns a list of subscriptions. The subscriptions returned are sorted by creation date, with the most recently created subscriptions appearing first.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param user The unique identifier for the user to be filtered by.
-     * @param plan The unique identifier for the plan to be filtered by.
-     * @param sim The unique identifier for the sim to be filtered by.
-     * @param status A comma-separated list of statuses to filter the subscriptions by. Only pending and active subscriptions are returned by default.
-     * @param after A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
-     * @param before A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
-     * @param limit The limit of items to be returned in the list, between 0 and 200.
      * @returns any Returns a list of subscription objects.
      * @throws ApiError
      */
-    public subscriptionsList(
+    public subscriptionsList({
+        project,
+        user,
+        plan,
+        sim,
+        status,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the user to be filtered by.
+         */
         user?: string,
+        /**
+         * The unique identifier for the plan to be filtered by.
+         */
         plan?: string,
+        /**
+         * The unique identifier for the sim to be filtered by.
+         */
         sim?: string,
+        /**
+         * A comma-separated list of statuses to filter the subscriptions by. Only pending and active subscriptions are returned by default.
+         */
         status?: Array<'pending' | 'active' | 'ended'>,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
         after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
         before?: string,
-        limit: number = 10,
-    ): CancelablePromise<{
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -175,13 +228,20 @@ export class SubscriptionsService {
     /**
      * Create a subscription
      * Creates a new subscription for an existing user in the specified project.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param requestBody Optional and required parameters to be passed in the request body to create a new subscription:
      * @returns subscription Returns the newly created subscription and supporting objects.
      * @throws ApiError
      */
-    public subscriptionsCreate(
+    public subscriptionsCreate({
+        project,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * Optional and required parameters to be passed in the request body to create a new subscription:
+         */
         requestBody: {
             /**
              * The unique identifier for the existing [plan](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzA-retrieve-a-plan) to be used for the subscription.
@@ -200,7 +260,7 @@ export class SubscriptionsService {
              */
             user: string;
         },
-    ): CancelablePromise<subscription> {
+    }): CancelablePromise<subscription> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project}/subscriptions',

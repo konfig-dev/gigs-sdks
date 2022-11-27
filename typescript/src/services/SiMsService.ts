@@ -14,15 +14,22 @@ export class SiMsService {
     /**
      * Retrieve a SIM
      * Retrieve the details of an existing SIM which the authenticated user is authorized to view.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the SIM.
      * @returns sim Returns the SIM if it exists.
      * @throws ApiError
      */
-    public siMsRetrieve(
+    public siMsRetrieve({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the SIM.
+         */
         id: string,
-    ): CancelablePromise<sim> {
+    }): CancelablePromise<sim> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/sims/{id}',
@@ -39,15 +46,22 @@ export class SiMsService {
     /**
      * Retrieve the SIM credentials
      * Retrieve the credentials of an existing SIM.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param id The unique identifier for the SIM.
      * @returns simCredentials Returns the SIM credentials.
      * @throws ApiError
      */
-    public siMsCredentialsRetrieve(
+    public siMsCredentialsRetrieve({
+        project,
+        id,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The unique identifier for the SIM.
+         */
         id: string,
-    ): CancelablePromise<simCredentials> {
+    }): CancelablePromise<simCredentials> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}/sims/{id}/credentials',
@@ -64,13 +78,20 @@ export class SiMsService {
     /**
      * Search for SIMs
      * Searches for existing SIMs matching the given parameters.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param requestBody SIM attributes to search for.
      * @returns any Returns a list schema response with all found SIMs.
      * @throws ApiError
      */
-    public siMsSearch(
+    public siMsSearch({
+        project,
+        requestBody,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * SIM attributes to search for.
+         */
         requestBody: {
             /**
              * The ICCID (integrated circuit card identifier) associated with the SIM.
@@ -81,7 +102,7 @@ export class SiMsService {
              */
             type?: Array<'eSIM' | 'pSIM'>;
         },
-    ): CancelablePromise<{
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */
@@ -116,27 +137,52 @@ export class SiMsService {
     /**
      * List all SIMs
      * Returns a list of SIMs. The SIMs returned are sorted by creation date, with the most recently created SIMs appearing first.
-     * @param project The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-     * @param provider The network provider ID for the sim to be filtered by.
-     * @param status A comma-separated list of statuses to filter the sims by.
-     * @param type The type for the sim to be filtered by.
-     * @param user The unique identifier for the user to be filtered by.
-     * @param after A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
-     * @param before A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
-     * @param limit The limit of items to be returned in the list, between 0 and 200.
      * @returns any Returns a dictionary with an items property that contains an array of SIMs.
      * @throws ApiError
      */
-    public siMsList(
+    public siMsList({
+        project,
+        provider,
+        status,
+        type,
+        user,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
         project: string,
+        /**
+         * The network provider ID for the sim to be filtered by.
+         */
         provider?: Array<string>,
+        /**
+         * A comma-separated list of statuses to filter the sims by.
+         */
         status?: Array<'inactive' | 'active' | 'retired'>,
+        /**
+         * The type for the sim to be filtered by.
+         */
         type?: 'eSIM' | 'pSIM',
+        /**
+         * The unique identifier for the user to be filtered by.
+         */
         user?: string,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
         after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
         before?: string,
-        limit: number = 10,
-    ): CancelablePromise<{
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): CancelablePromise<{
         /**
          * Type of object is always `list`.
          */

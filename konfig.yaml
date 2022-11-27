@@ -6,6 +6,7 @@ generators:
     copyDirectory: typescript
     npmName: gigs-typescript-sdk
     clientName: GigsClient
+    httpClient: node
     git:
       userId: konfig-dev
       repoId: gigs-sdks-2/tree/main/typescript

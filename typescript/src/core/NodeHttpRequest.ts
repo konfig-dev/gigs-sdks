@@ -7,7 +7,7 @@ import type { CancelablePromise } from './CancelablePromise';
 import type { ConfigType } from './Config';
 import { request as __request } from './request';
 
-export class FetchHttpRequest extends BaseHttpRequest {
+export class NodeHttpRequest extends BaseHttpRequest {
 
     constructor(config: ConfigType) {
         super(config);

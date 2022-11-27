@@ -3,7 +3,7 @@
 /* eslint-disable */
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
 import type { ConfigType } from './core/Config';
-import { FetchHttpRequest } from './core/FetchHttpRequest';
+import { NodeHttpRequest } from './core/NodeHttpRequest';
 
 import { DevicesService } from './services/DevicesService';
 import { PlansService } from './services/PlansService';
@@ -29,7 +29,7 @@ export class GigsClient {
 
     public readonly request: BaseHttpRequest;
 
-    constructor(config?: Partial<ConfigType>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
+    constructor(config?: Partial<ConfigType>, HttpRequest: HttpRequestConstructor = NodeHttpRequest) {
         this.request = new HttpRequest({
             BASE: config?.BASE ?? 'http://localhost:4010',
             VERSION: config?.VERSION ?? '2022-09-28',

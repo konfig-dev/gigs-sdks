@@ -360,7 +360,7 @@ export const __request = <T>(
 
 describe("getting started", () => {
   it("basic use case", () => {
-    const client = new GigsClient(undefined, NodeHttpRequest);
+    const client = new GigsClient({ TOKEN: "MyAuthToken" }, NodeHttpRequest);
     client.users.usersCreate("myProject", { email: "test@test.com" });
   });
 });

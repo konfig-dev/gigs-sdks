@@ -16,7 +16,7 @@ export class SubscriptionsService {
      * @returns subscription Returns the subscription after a successful cancellation.
      * @throws ApiError
      */
-    public subscriptionsCancel({
+    public cancel({
         project,
         id,
     }: {
@@ -49,7 +49,7 @@ export class SubscriptionsService {
      * @returns subscription Returns the subscription if it exists.
      * @throws ApiError
      */
-    public subscriptionsRetrieve({
+    public retrieve({
         project,
         id,
     }: {
@@ -81,7 +81,7 @@ export class SubscriptionsService {
      * @returns subscription Returns the ended subscription after a successful termination.
      * @throws ApiError
      */
-    public subscriptionsEnd({
+    public end({
         project,
         id,
     }: {
@@ -114,7 +114,7 @@ export class SubscriptionsService {
      * @returns subscription Returns the resumed subscription.
      * @throws ApiError
      */
-    public subscriptionsResume({
+    public resume({
         project,
         id,
     }: {
@@ -147,7 +147,7 @@ export class SubscriptionsService {
      * @returns any Returns a list of subscription objects.
      * @throws ApiError
      */
-    public subscriptionsList({
+    public list({
         project,
         user,
         plan,
@@ -231,7 +231,7 @@ export class SubscriptionsService {
      * @returns subscription Returns the newly created subscription and supporting objects.
      * @throws ApiError
      */
-    public subscriptionsCreate({
+    public create({
         project,
         requestBody,
     }: {

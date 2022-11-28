@@ -105,7 +105,7 @@ export class PlansService {
      * @returns plan Returns the plan if it exists.
      * @throws ApiError
      */
-    public plansRetrieve({
+    public retrieve({
         project,
         id,
     }: {
@@ -137,7 +137,7 @@ export class PlansService {
      * @returns plan Returns the updated plan.
      * @throws ApiError
      */
-    public plansUpdate({
+    public update({
         project,
         id,
         requestBody,
@@ -199,7 +199,7 @@ export class PlansService {
      * @returns plan Returns the archived plan.
      * @throws ApiError
      */
-    public plansArchive({
+    public archive({
         project,
         id,
     }: {
@@ -241,7 +241,7 @@ export class PlansService {
      * @returns plan Returns the available plan.
      * @throws ApiError
      */
-    public plansPublish({
+    public publish({
         project,
         id,
     }: {
@@ -275,7 +275,7 @@ export class PlansService {
      * @returns any Returns a list of plan objects.
      * @throws ApiError
      */
-    public plansList({
+    public list({
         project,
         provider,
         simType,

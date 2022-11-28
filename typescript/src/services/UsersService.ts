@@ -16,7 +16,7 @@ export class UsersService {
      * @returns user Returns the user object if the user exists.
      * @throws ApiError
      */
-    public usersRetrieve({
+    public retrieve({
         project,
         id,
     }: {
@@ -48,7 +48,7 @@ export class UsersService {
      * @returns user Returns the user after a successful deletion.
      * @throws ApiError
      */
-    public usersDelete({
+    public delete({
         project,
         id,
     }: {
@@ -81,7 +81,7 @@ export class UsersService {
      * @returns user Returns the updated user.
      * @throws ApiError
      */
-    public usersUpdate({
+    public update({
         project,
         id,
         requestBody,
@@ -143,7 +143,7 @@ export class UsersService {
      * @returns any Returns the users matching the search criteria.
      * @throws ApiError
      */
-    public usersSearch({
+    public search({
         project,
         requestBody,
     }: {
@@ -198,7 +198,7 @@ export class UsersService {
      * @returns any Returns a dictionary with an items property that contains an array of user objects.
      * @throws ApiError
      */
-    public usersList({
+    public list({
         project,
         after,
         before,
@@ -258,7 +258,7 @@ export class UsersService {
      * @returns user Returns the created user.
      * @throws ApiError
      */
-    public usersCreate({
+    public create({
         project,
         requestBody,
     }: {

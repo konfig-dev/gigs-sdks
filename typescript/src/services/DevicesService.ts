@@ -163,7 +163,7 @@ export class DevicesService {
      * @returns device Returns the device object if it exists.
      * @throws ApiError
      */
-    public devicesRetrieve({
+    public retrieve({
         project,
         id,
     }: {
@@ -195,7 +195,7 @@ export class DevicesService {
      * @returns device Returns the device after a successful deletion.
      * @throws ApiError
      */
-    public devicesDelete({
+    public delete({
         project,
         id,
     }: {
@@ -237,7 +237,7 @@ export class DevicesService {
      * @returns device Returns the updated device object.
      * @throws ApiError
      */
-    public devicesUpdate({
+    public update({
         project,
         id,
         requestBody,
@@ -291,7 +291,7 @@ export class DevicesService {
      * @returns any Returns a list schema response with all found devices.
      * @throws ApiError
      */
-    public devicesSearch({
+    public search({
         project,
         requestBody,
     }: {
@@ -346,7 +346,7 @@ export class DevicesService {
      * @returns any Returns a dictionary with an items property that contains an array of devices.
      * @throws ApiError
      */
-    public devicesList({
+    public list({
         project,
         sim,
         user,
@@ -421,7 +421,7 @@ export class DevicesService {
      * @returns device Returns the created device.
      * @throws ApiError
      */
-    public devicesCreate({
+    public create({
         project,
         requestBody,
     }: {

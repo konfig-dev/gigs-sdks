@@ -17,7 +17,7 @@ export class ProjectsService {
      * @returns project Returns the project object if it exists.
      * @throws ApiError
      */
-    public projectsRetrieve({
+    public retrieve({
         project,
     }: {
         /**
@@ -43,7 +43,7 @@ export class ProjectsService {
      * @returns any Returns a dictionary with an items property that contains an array of projects.
      * @throws ApiError
      */
-    public projectsList({
+    public list({
         after,
         before,
         limit = 10,
@@ -106,7 +106,7 @@ export class ProjectsService {
      * @returns projectSetting Returns the project setting object if it exists.
      * @throws ApiError
      */
-    public projectSettingsRetrieve({
+    public ettingsRetrieve({
         project,
         name,
     }: {
@@ -146,7 +146,7 @@ export class ProjectsService {
      * @returns any Returns a list of project setting objects.
      * @throws ApiError
      */
-    public projectSettingsList({
+    public ettingsList({
         project,
         after,
         before,

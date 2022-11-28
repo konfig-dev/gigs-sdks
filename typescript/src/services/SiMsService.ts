@@ -17,7 +17,7 @@ export class SiMsService {
      * @returns sim Returns the SIM if it exists.
      * @throws ApiError
      */
-    public siMsRetrieve({
+    public retrieve({
         project,
         id,
     }: {
@@ -49,7 +49,7 @@ export class SiMsService {
      * @returns simCredentials Returns the SIM credentials.
      * @throws ApiError
      */
-    public siMsCredentialsRetrieve({
+    public credentialsRetrieve({
         project,
         id,
     }: {
@@ -81,7 +81,7 @@ export class SiMsService {
      * @returns any Returns a list schema response with all found SIMs.
      * @throws ApiError
      */
-    public siMsSearch({
+    public search({
         project,
         requestBody,
     }: {
@@ -140,7 +140,7 @@ export class SiMsService {
      * @returns any Returns a dictionary with an items property that contains an array of SIMs.
      * @throws ApiError
      */
-    public siMsList({
+    public list({
         project,
         provider,
         status,

@@ -16,7 +16,7 @@ export class UsageService {
      * @returns any Returns the list of usage records.
      * @throws ApiError
      */
-    public subscriptionUsageRecordList({
+    public subscriptionRecordList({
         project,
         id,
         period,

@@ -16,7 +16,7 @@ export class UserAddressesService {
      * @returns any Returns a list of address objects.
      * @throws ApiError
      */
-    public userAddressesList({
+    public list({
         project,
         user,
     }: {
@@ -65,7 +65,7 @@ export class UserAddressesService {
      * @returns userAddress Returns the created address.
      * @throws ApiError
      */
-    public userAddressesCreate({
+    public create({
         project,
         user,
         requestBody,
@@ -135,7 +135,7 @@ export class UserAddressesService {
      * @returns userAddress Returns the address if it exists and is owned by the user.
      * @throws ApiError
      */
-    public userAddressesRetrieve({
+    public retrieve({
         project,
         user,
         id,
@@ -174,7 +174,7 @@ export class UserAddressesService {
      * @returns userAddress Returns the address after a successful deletion.
      * @throws ApiError
      */
-    public userAddressesDelete({
+    public delete({
         project,
         user,
         id,

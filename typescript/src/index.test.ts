@@ -5,19 +5,19 @@ const PROJECT = "MyProject";
 
 describe("getting started", () => {
   it("basic use case", async () => {
-    const client = new GigsClient({ TOKEN: "MyAuthToken" });
-    const user = await client.users.create({
+    const gigs = new GigsClient({ TOKEN: "MyAuthToken" });
+    const user = await gigs.users.create({
       project: PROJECT,
       requestBody: {
         email: "test@test.com",
       },
     });
     const plan = (
-      await client.plans.list({
+      await gigs.plans.list({
         project: PROJECT,
       })
     ).items[0];
-    const userAddress = await client.userAddresses.create({
+    const userAddress = await gigs.userAddresses.create({
       project: PROJECT,
       user: user.id,
       requestBody: {
@@ -26,7 +26,7 @@ describe("getting started", () => {
         country: "USA",
       },
     });
-    const subscription = await client.subscriptions.create({
+    const subscription = await gigs.subscriptions.create({
       project: PROJECT,
       requestBody: {
         plan: plan.id,

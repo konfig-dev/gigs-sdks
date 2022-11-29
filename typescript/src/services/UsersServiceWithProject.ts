@@ -8,7 +8,11 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class UsersService {
 
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
+    public readonly project: string;
+
+    constructor(public readonly httpRequest: BaseHttpRequest, project: string) {
+        this.project = project
+    }
 
     /**
      * Retrieve a user
@@ -17,13 +21,8 @@ export class UsersService {
      * @throws ApiError
      */
     public retrieve({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the user.
          */
@@ -33,7 +32,7 @@ export class UsersService {
             method: 'GET',
             url: '/projects/{project}/users/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -51,13 +50,8 @@ export class UsersService {
      * @throws ApiError
      */
     public delete({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the user.
          */
@@ -67,7 +61,7 @@ export class UsersService {
             method: 'DELETE',
             url: '/projects/{project}/users/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -86,14 +80,9 @@ export class UsersService {
      * @throws ApiError
      */
     public update({
-        project,
         id,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the user.
          */
@@ -129,7 +118,7 @@ export class UsersService {
             method: 'PATCH',
             url: '/projects/{project}/users/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -150,13 +139,8 @@ export class UsersService {
      * @throws ApiError
      */
     public search({
-        project,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * User attributes to search by.
          */
@@ -188,7 +172,7 @@ export class UsersService {
             method: 'POST',
             url: '/projects/{project}/users/search',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             body: requestBody,
@@ -206,15 +190,10 @@ export class UsersService {
      * @throws ApiError
      */
     public list({
-        project,
         after,
         before,
         limit = 10,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
          */
@@ -249,7 +228,7 @@ export class UsersService {
             method: 'GET',
             url: '/projects/{project}/users',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             query: {
@@ -270,13 +249,8 @@ export class UsersService {
      * @throws ApiError
      */
     public create({
-        project,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * User attributes to create.
          */
@@ -308,7 +282,7 @@ export class UsersService {
             method: 'POST',
             url: '/projects/{project}/users',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             body: requestBody,

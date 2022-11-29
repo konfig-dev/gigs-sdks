@@ -9,6 +9,9 @@ generators:
     httpClient: node
     removeTagFromOperationId: true
     useOptions: true
+    parameterState:
+      - name: project
+        type: string
     git:
       userId: konfig-dev
       repoId: gigs-sdks-2/tree/main/typescript

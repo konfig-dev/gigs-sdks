@@ -8,7 +8,11 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class UsageService {
 
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
+    public readonly project: string;
+
+    constructor(public readonly httpRequest: BaseHttpRequest, project: string) {
+        this.project = project
+    }
 
     /**
      * List subscription usage records
@@ -17,17 +21,12 @@ export class UsageService {
      * @throws ApiError
      */
     public subscriptionRecordList({
-        project,
         id,
         period,
         start,
         end,
         aggregation,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the subscription.
          */
@@ -70,7 +69,7 @@ export class UsageService {
             method: 'GET',
             url: '/projects/{project}/subscriptions/{id}/usage',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,

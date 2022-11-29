@@ -8,7 +8,11 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class UserAddressesService {
 
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
+    public readonly project: string;
+
+    constructor(public readonly httpRequest: BaseHttpRequest, project: string) {
+        this.project = project
+    }
 
     /**
      * List all user addresses
@@ -17,13 +21,8 @@ export class UserAddressesService {
      * @throws ApiError
      */
     public list({
-        project,
         user,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the user.
          */
@@ -50,7 +49,7 @@ export class UserAddressesService {
             method: 'GET',
             url: '/projects/{project}/users/{user}/addresses',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'user': user
                 ,
@@ -68,14 +67,9 @@ export class UserAddressesService {
      * @throws ApiError
      */
     public create({
-        project,
         user,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the user.
          */
@@ -119,7 +113,7 @@ export class UserAddressesService {
             method: 'POST',
             url: '/projects/{project}/users/{user}/addresses',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'user': user
                 ,
@@ -140,14 +134,9 @@ export class UserAddressesService {
      * @throws ApiError
      */
     public retrieve({
-        project,
         user,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the user.
          */
@@ -161,7 +150,7 @@ export class UserAddressesService {
             method: 'GET',
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'user': user
                 ,
@@ -182,14 +171,9 @@ export class UserAddressesService {
      * @throws ApiError
      */
     public delete({
-        project,
         user,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the user.
          */
@@ -203,7 +187,7 @@ export class UserAddressesService {
             method: 'DELETE',
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'user': user
                 ,

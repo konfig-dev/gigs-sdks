@@ -9,7 +9,11 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class PlansService {
 
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
+    public readonly project: string;
+
+    constructor(public readonly httpRequest: BaseHttpRequest, project: string) {
+        this.project = project
+    }
 
     /**
      * Retrieve a plan document
@@ -18,14 +22,9 @@ export class PlansService {
      * @throws ApiError
      */
     public planDocumentRetrieve({
-        project,
         plan,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the plan.
          */
@@ -39,7 +38,7 @@ export class PlansService {
             method: 'GET',
             url: '/projects/{project}/plans/{plan}/documents/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'plan': plan
                 ,
@@ -60,13 +59,8 @@ export class PlansService {
      * @throws ApiError
      */
     public planDocumentsList({
-        project,
         plan,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the plan.
          */
@@ -93,7 +87,7 @@ export class PlansService {
             method: 'GET',
             url: '/projects/{project}/plans/{plan}/documents',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'plan': plan
                 ,
@@ -111,13 +105,8 @@ export class PlansService {
      * @throws ApiError
      */
     public retrieve({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the plan.
          */
@@ -127,7 +116,7 @@ export class PlansService {
             method: 'GET',
             url: '/projects/{project}/plans/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -145,14 +134,9 @@ export class PlansService {
      * @throws ApiError
      */
     public update({
-        project,
         id,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the plan.
          */
@@ -179,7 +163,7 @@ export class PlansService {
             method: 'PATCH',
             url: '/projects/{project}/plans/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -209,13 +193,8 @@ export class PlansService {
      * @throws ApiError
      */
     public archive({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the plan.
          */
@@ -225,7 +204,7 @@ export class PlansService {
             method: 'POST',
             url: '/projects/{project}/plans/{id}/archive',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -253,13 +232,8 @@ export class PlansService {
      * @throws ApiError
      */
     public publish({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the plan.
          */
@@ -269,7 +243,7 @@ export class PlansService {
             method: 'POST',
             url: '/projects/{project}/plans/{id}/publish',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -289,7 +263,6 @@ export class PlansService {
      * @throws ApiError
      */
     public list({
-        project,
         provider,
         simType,
         status,
@@ -297,10 +270,6 @@ export class PlansService {
         before,
         limit = 10,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The network provider ID to filter the plans by.
          */
@@ -347,7 +316,7 @@ export class PlansService {
             method: 'GET',
             url: '/projects/{project}/plans',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             query: {

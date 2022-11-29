@@ -9,7 +9,11 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class SiMsService {
 
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
+    public readonly project: string;
+
+    constructor(public readonly httpRequest: BaseHttpRequest, project: string) {
+        this.project = project
+    }
 
     /**
      * Retrieve a SIM
@@ -18,13 +22,8 @@ export class SiMsService {
      * @throws ApiError
      */
     public retrieve({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the SIM.
          */
@@ -34,7 +33,7 @@ export class SiMsService {
             method: 'GET',
             url: '/projects/{project}/sims/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -52,13 +51,8 @@ export class SiMsService {
      * @throws ApiError
      */
     public credentialsRetrieve({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the SIM.
          */
@@ -68,7 +62,7 @@ export class SiMsService {
             method: 'GET',
             url: '/projects/{project}/sims/{id}/credentials',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -86,13 +80,8 @@ export class SiMsService {
      * @throws ApiError
      */
     public search({
-        project,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * SIM attributes to search for.
          */
@@ -128,7 +117,7 @@ export class SiMsService {
             method: 'POST',
             url: '/projects/{project}/sims/search',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             body: requestBody,
@@ -146,7 +135,6 @@ export class SiMsService {
      * @throws ApiError
      */
     public list({
-        project,
         provider,
         status,
         type,
@@ -155,10 +143,6 @@ export class SiMsService {
         before,
         limit = 10,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The network provider ID for the sim to be filtered by.
          */
@@ -209,7 +193,7 @@ export class SiMsService {
             method: 'GET',
             url: '/projects/{project}/sims',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             query: {

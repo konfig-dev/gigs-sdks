@@ -9,7 +9,11 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class DevicesService {
 
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
+    public readonly project: string;
+
+    constructor(public readonly httpRequest: BaseHttpRequest, project: string) {
+        this.project = project
+    }
 
     /**
      * Retrieve a device model
@@ -171,13 +175,8 @@ export class DevicesService {
      * @throws ApiError
      */
     public retrieve({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the device.
          */
@@ -187,7 +186,7 @@ export class DevicesService {
             method: 'GET',
             url: '/projects/{project}/devices/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -205,13 +204,8 @@ export class DevicesService {
      * @throws ApiError
      */
     public delete({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the device.
          */
@@ -221,7 +215,7 @@ export class DevicesService {
             method: 'DELETE',
             url: '/projects/{project}/devices/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -249,14 +243,9 @@ export class DevicesService {
      * @throws ApiError
      */
     public update({
-        project,
         id,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the device.
          */
@@ -283,7 +272,7 @@ export class DevicesService {
             method: 'PATCH',
             url: '/projects/{project}/devices/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -305,13 +294,8 @@ export class DevicesService {
      * @throws ApiError
      */
     public search({
-        project,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * Device attributes to search for.
          */
@@ -343,7 +327,7 @@ export class DevicesService {
             method: 'POST',
             url: '/projects/{project}/devices/search',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             body: requestBody,
@@ -361,17 +345,12 @@ export class DevicesService {
      * @throws ApiError
      */
     public list({
-        project,
         sim,
         user,
         after,
         before,
         limit = 10,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the sim to be filtered by.
          */
@@ -414,7 +393,7 @@ export class DevicesService {
             method: 'GET',
             url: '/projects/{project}/devices',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             query: {
@@ -442,13 +421,8 @@ export class DevicesService {
      * @throws ApiError
      */
     public create({
-        project,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * Device attributes to create. You must specify either an IMEI or a user.
          */
@@ -475,7 +449,7 @@ export class DevicesService {
             method: 'POST',
             url: '/projects/{project}/devices',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             body: requestBody,

@@ -9,7 +9,11 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class ProjectsService {
 
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
+    public readonly project: string;
+
+    constructor(public readonly httpRequest: BaseHttpRequest, project: string) {
+        this.project = project
+    }
 
     /**
      * Retrieve a project
@@ -17,19 +21,12 @@ export class ProjectsService {
      * @returns project Returns the project object if it exists.
      * @throws ApiError
      */
-    public retrieve({
-        project,
-    }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
-    }): CancelablePromise<project> {
+    public retrieve(): CancelablePromise<project> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project}',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             errors: {
@@ -111,13 +108,8 @@ export class ProjectsService {
      * @throws ApiError
      */
     public ettingsRetrieve({
-        project,
         name,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier of the application the project setting applies to.
          */
@@ -127,7 +119,7 @@ export class ProjectsService {
             method: 'GET',
             url: '/projects/{project}/settings/{name}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'name': name
                 ,
@@ -153,15 +145,10 @@ export class ProjectsService {
      * @throws ApiError
      */
     public ettingsList({
-        project,
         after,
         before,
         limit = 10,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
          */
@@ -196,7 +183,7 @@ export class ProjectsService {
             method: 'GET',
             url: '/projects/{project}/settings',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             query: {

@@ -8,7 +8,11 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class SubscriptionsService {
 
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
+    public readonly project: string;
+
+    constructor(public readonly httpRequest: BaseHttpRequest, project: string) {
+        this.project = project
+    }
 
     /**
      * Cancel an active subscription
@@ -17,13 +21,8 @@ export class SubscriptionsService {
      * @throws ApiError
      */
     public cancel({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the subscription.
          */
@@ -33,7 +32,7 @@ export class SubscriptionsService {
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/cancel',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -52,13 +51,8 @@ export class SubscriptionsService {
      * @throws ApiError
      */
     public retrieve({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the subscription.
          */
@@ -68,7 +62,7 @@ export class SubscriptionsService {
             method: 'GET',
             url: '/projects/{project}/subscriptions/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -86,13 +80,8 @@ export class SubscriptionsService {
      * @throws ApiError
      */
     public end({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the subscription.
          */
@@ -102,7 +91,7 @@ export class SubscriptionsService {
             method: 'DELETE',
             url: '/projects/{project}/subscriptions/{id}',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -121,13 +110,8 @@ export class SubscriptionsService {
      * @throws ApiError
      */
     public resume({
-        project,
         id,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the subscription.
          */
@@ -137,7 +121,7 @@ export class SubscriptionsService {
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/resume',
             path: {
-                'project': project
+                'project': this.project
                 ,
                 'id': id
                 ,
@@ -156,7 +140,6 @@ export class SubscriptionsService {
      * @throws ApiError
      */
     public list({
-        project,
         user,
         plan,
         sim,
@@ -165,10 +148,6 @@ export class SubscriptionsService {
         before,
         limit = 10,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * The unique identifier for the user to be filtered by.
          */
@@ -219,7 +198,7 @@ export class SubscriptionsService {
             method: 'GET',
             url: '/projects/{project}/subscriptions',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             query: {
@@ -248,13 +227,8 @@ export class SubscriptionsService {
      * @throws ApiError
      */
     public create({
-        project,
         requestBody,
     }: {
-        /**
-         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
-         */
-        project: string,
         /**
          * Optional and required parameters to be passed in the request body to create a new subscription:
          */
@@ -281,7 +255,7 @@ export class SubscriptionsService {
             method: 'POST',
             url: '/projects/{project}/subscriptions',
             path: {
-                'project': project
+                'project': this.project
                 ,
             },
             body: requestBody,

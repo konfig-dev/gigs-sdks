@@ -1,24 +1,15 @@
 import { GigsClient } from "./GigsClient";
-import { subscription } from "./models/subscription";
-
-const PROJECT = "MyProject";
 
 describe("getting started", () => {
   it("basic use case", async () => {
-    const gigs = new GigsClient({ TOKEN: "MyAuthToken" });
+    const gigs = new GigsClient({ TOKEN: "MyAuthToken" }).project("MyProject");
     const user = await gigs.users.create({
-      project: PROJECT,
       requestBody: {
         email: "test@test.com",
       },
     });
-    const plan = (
-      await gigs.plans.list({
-        project: PROJECT,
-      })
-    ).items[0];
+    const plan = (await gigs.plans.list({})).items[0];
     const userAddress = await gigs.userAddresses.create({
-      project: PROJECT,
       user: user.id,
       requestBody: {
         line1: "90 Bedford Street",
@@ -27,7 +18,6 @@ describe("getting started", () => {
       },
     });
     const subscription = await gigs.subscriptions.create({
-      project: PROJECT,
       requestBody: {
         plan: plan.id,
         user: user.id,

@@ -39,10 +39,13 @@ export class PlansService {
             url: '/projects/{project}/plans/{plan}/documents/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'plan': plan
+                'plan':
+                plan
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -88,8 +91,10 @@ export class PlansService {
             url: '/projects/{project}/plans/{plan}/documents',
             path: {
                 'project': this.project
+
                 ,
-                'plan': plan
+                'plan':
+                plan
                 ,
             },
             errors: {
@@ -117,8 +122,10 @@ export class PlansService {
             url: '/projects/{project}/plans/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -164,8 +171,10 @@ export class PlansService {
             url: '/projects/{project}/plans/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             body: requestBody,
@@ -205,8 +214,10 @@ export class PlansService {
             url: '/projects/{project}/plans/{id}/archive',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -244,8 +255,10 @@ export class PlansService {
             url: '/projects/{project}/plans/{id}/publish',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -317,20 +330,27 @@ export class PlansService {
             url: '/projects/{project}/plans',
             path: {
                 'project': this.project
+
                 ,
             },
             query: {
-                'provider': provider
+                'provider':
+                provider
                 ,
-                'simType': simType
+                'simType':
+                simType
                 ,
-                'status': status
+                'status':
+                status
                 ,
-                'after': after
+                'after':
+                after
                 ,
-                'before': before
+                'before':
+                before
                 ,
-                'limit': limit
+                'limit':
+                limit
                 ,
             },
         });

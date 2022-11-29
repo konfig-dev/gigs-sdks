@@ -70,18 +70,24 @@ export class UsageService {
             url: '/projects/{project}/subscriptions/{id}/usage',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             query: {
-                'period': period
+                'period':
+                period
                 ,
-                'start': start
+                'start':
+                start
                 ,
-                'end': end
+                'end':
+                end
                 ,
-                'aggregation': aggregation
+                'aggregation':
+                aggregation
                 ,
             },
             errors: {

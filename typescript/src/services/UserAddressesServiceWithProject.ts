@@ -50,8 +50,10 @@ export class UserAddressesService {
             url: '/projects/{project}/users/{user}/addresses',
             path: {
                 'project': this.project
+
                 ,
-                'user': user
+                'user':
+                user
                 ,
             },
             errors: {
@@ -114,8 +116,10 @@ export class UserAddressesService {
             url: '/projects/{project}/users/{user}/addresses',
             path: {
                 'project': this.project
+
                 ,
-                'user': user
+                'user':
+                user
                 ,
             },
             body: requestBody,
@@ -151,10 +155,13 @@ export class UserAddressesService {
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'user': user
+                'user':
+                user
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -188,10 +195,13 @@ export class UserAddressesService {
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'user': user
+                'user':
+                user
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {

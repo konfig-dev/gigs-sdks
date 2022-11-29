@@ -33,7 +33,8 @@ export class DevicesService {
             method: 'GET',
             url: '/deviceModels/{id}',
             path: {
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -102,17 +103,23 @@ export class DevicesService {
             method: 'GET',
             url: '/deviceModels',
             query: {
-                'type': type
+                'type':
+                type
                 ,
-                'brand': brand
+                'brand':
+                brand
                 ,
-                'simType': simType
+                'simType':
+                simType
                 ,
-                'after': after
+                'after':
+                after
                 ,
-                'before': before
+                'before':
+                before
                 ,
-                'limit': limit
+                'limit':
+                limit
                 ,
             },
             errors: {
@@ -187,8 +194,10 @@ export class DevicesService {
             url: '/projects/{project}/devices/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -216,8 +225,10 @@ export class DevicesService {
             url: '/projects/{project}/devices/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -273,8 +284,10 @@ export class DevicesService {
             url: '/projects/{project}/devices/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             body: requestBody,
@@ -328,6 +341,7 @@ export class DevicesService {
             url: '/projects/{project}/devices/search',
             path: {
                 'project': this.project
+
                 ,
             },
             body: requestBody,
@@ -394,18 +408,24 @@ export class DevicesService {
             url: '/projects/{project}/devices',
             path: {
                 'project': this.project
+
                 ,
             },
             query: {
-                'sim': sim
+                'sim':
+                sim
                 ,
-                'user': user
+                'user':
+                user
                 ,
-                'after': after
+                'after':
+                after
                 ,
-                'before': before
+                'before':
+                before
                 ,
-                'limit': limit
+                'limit':
+                limit
                 ,
             },
             errors: {
@@ -450,6 +470,7 @@ export class DevicesService {
             url: '/projects/{project}/devices',
             path: {
                 'project': this.project
+
                 ,
             },
             body: requestBody,

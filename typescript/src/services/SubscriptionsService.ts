@@ -33,10 +33,8 @@ export class SubscriptionsService {
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/cancel',
             path: {
-                'project': project
-                ,
-                'id': id
-                ,
+                'project': project,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -68,10 +66,8 @@ export class SubscriptionsService {
             method: 'GET',
             url: '/projects/{project}/subscriptions/{id}',
             path: {
-                'project': project
-                ,
-                'id': id
-                ,
+                'project': project,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -102,10 +98,8 @@ export class SubscriptionsService {
             method: 'DELETE',
             url: '/projects/{project}/subscriptions/{id}',
             path: {
-                'project': project
-                ,
-                'id': id
-                ,
+                'project': project,
+                'id': id,
             },
             errors: {
                 403: `The authenticated user doesn't have permissions to perform the request.`,
@@ -137,10 +131,8 @@ export class SubscriptionsService {
             method: 'POST',
             url: '/projects/{project}/subscriptions/{id}/resume',
             path: {
-                'project': project
-                ,
-                'id': id
-                ,
+                'project': project,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -219,24 +211,16 @@ export class SubscriptionsService {
             method: 'GET',
             url: '/projects/{project}/subscriptions',
             path: {
-                'project': project
-                ,
+                'project': project,
             },
             query: {
-                'user': user
-                ,
-                'plan': plan
-                ,
-                'sim': sim
-                ,
-                'status': status
-                ,
-                'after': after
-                ,
-                'before': before
-                ,
-                'limit': limit
-                ,
+                'user': user,
+                'plan': plan,
+                'sim': sim,
+                'status': status,
+                'after': after,
+                'before': before,
+                'limit': limit,
             },
         });
     }
@@ -281,8 +265,7 @@ export class SubscriptionsService {
             method: 'POST',
             url: '/projects/{project}/subscriptions',
             path: {
-                'project': project
-                ,
+                'project': project,
             },
             body: requestBody,
             mediaType: 'application/json',

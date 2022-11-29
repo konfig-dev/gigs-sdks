@@ -29,8 +29,7 @@ export class ProjectsService {
             method: 'GET',
             url: '/projects/{project}',
             path: {
-                'project': project
-                ,
+                'project': project,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -83,12 +82,9 @@ export class ProjectsService {
             method: 'GET',
             url: '/projects',
             query: {
-                'after': after
-                ,
-                'before': before
-                ,
-                'limit': limit
-                ,
+                'after': after,
+                'before': before,
+                'limit': limit,
             },
             errors: {
                 422: `The request can't be processed, often due to an invalid parameter or incompatible system state.`,
@@ -127,10 +123,8 @@ export class ProjectsService {
             method: 'GET',
             url: '/projects/{project}/settings/{name}',
             path: {
-                'project': project
-                ,
-                'name': name
-                ,
+                'project': project,
+                'name': name,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -196,16 +190,12 @@ export class ProjectsService {
             method: 'GET',
             url: '/projects/{project}/settings',
             path: {
-                'project': project
-                ,
+                'project': project,
             },
             query: {
-                'after': after
-                ,
-                'before': before
-                ,
-                'limit': limit
-                ,
+                'after': after,
+                'before': before,
+                'limit': limit,
             },
         });
     }

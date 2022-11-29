@@ -27,6 +27,7 @@ export class ProjectsService {
             url: '/projects/{project}',
             path: {
                 'project': this.project
+
                 ,
             },
             errors: {
@@ -80,11 +81,14 @@ export class ProjectsService {
             method: 'GET',
             url: '/projects',
             query: {
-                'after': after
+                'after':
+                after
                 ,
-                'before': before
+                'before':
+                before
                 ,
-                'limit': limit
+                'limit':
+                limit
                 ,
             },
             errors: {
@@ -120,8 +124,10 @@ export class ProjectsService {
             url: '/projects/{project}/settings/{name}',
             path: {
                 'project': this.project
+
                 ,
-                'name': name
+                'name':
+                name
                 ,
             },
             errors: {
@@ -184,14 +190,18 @@ export class ProjectsService {
             url: '/projects/{project}/settings',
             path: {
                 'project': this.project
+
                 ,
             },
             query: {
-                'after': after
+                'after':
+                after
                 ,
-                'before': before
+                'before':
+                before
                 ,
-                'limit': limit
+                'limit':
+                limit
                 ,
             },
         });

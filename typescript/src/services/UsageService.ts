@@ -70,20 +70,14 @@ export class UsageService {
             method: 'GET',
             url: '/projects/{project}/subscriptions/{id}/usage',
             path: {
-                'project': project
-                ,
-                'id': id
-                ,
+                'project': project,
+                'id': id,
             },
             query: {
-                'period': period
-                ,
-                'start': start
-                ,
-                'end': end
-                ,
-                'aggregation': aggregation
-                ,
+                'period': period,
+                'start': start,
+                'end': end,
+                'aggregation': aggregation,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,

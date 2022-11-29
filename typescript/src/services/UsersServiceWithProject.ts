@@ -33,8 +33,10 @@ export class UsersService {
             url: '/projects/{project}/users/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -62,8 +64,10 @@ export class UsersService {
             url: '/projects/{project}/users/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -119,8 +123,10 @@ export class UsersService {
             url: '/projects/{project}/users/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             body: requestBody,
@@ -173,6 +179,7 @@ export class UsersService {
             url: '/projects/{project}/users/search',
             path: {
                 'project': this.project
+
                 ,
             },
             body: requestBody,
@@ -229,14 +236,18 @@ export class UsersService {
             url: '/projects/{project}/users',
             path: {
                 'project': this.project
+
                 ,
             },
             query: {
-                'after': after
+                'after':
+                after
                 ,
-                'before': before
+                'before':
+                before
                 ,
-                'limit': limit
+                'limit':
+                limit
                 ,
             },
         });
@@ -283,6 +294,7 @@ export class UsersService {
             url: '/projects/{project}/users',
             path: {
                 'project': this.project
+
                 ,
             },
             body: requestBody,

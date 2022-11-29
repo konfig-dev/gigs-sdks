@@ -34,8 +34,10 @@ export class SiMsService {
             url: '/projects/{project}/sims/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -63,8 +65,10 @@ export class SiMsService {
             url: '/projects/{project}/sims/{id}/credentials',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -118,6 +122,7 @@ export class SiMsService {
             url: '/projects/{project}/sims/search',
             path: {
                 'project': this.project
+
                 ,
             },
             body: requestBody,
@@ -194,22 +199,30 @@ export class SiMsService {
             url: '/projects/{project}/sims',
             path: {
                 'project': this.project
+
                 ,
             },
             query: {
-                'provider': provider
+                'provider':
+                provider
                 ,
-                'status': status
+                'status':
+                status
                 ,
-                'type': type
+                'type':
+                type
                 ,
-                'user': user
+                'user':
+                user
                 ,
-                'after': after
+                'after':
+                after
                 ,
-                'before': before
+                'before':
+                before
                 ,
-                'limit': limit
+                'limit':
+                limit
                 ,
             },
             errors: {

@@ -33,8 +33,10 @@ export class SubscriptionsService {
             url: '/projects/{project}/subscriptions/{id}/cancel',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -63,8 +65,10 @@ export class SubscriptionsService {
             url: '/projects/{project}/subscriptions/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -92,8 +96,10 @@ export class SubscriptionsService {
             url: '/projects/{project}/subscriptions/{id}',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -122,8 +128,10 @@ export class SubscriptionsService {
             url: '/projects/{project}/subscriptions/{id}/resume',
             path: {
                 'project': this.project
+
                 ,
-                'id': id
+                'id':
+                id
                 ,
             },
             errors: {
@@ -199,22 +207,30 @@ export class SubscriptionsService {
             url: '/projects/{project}/subscriptions',
             path: {
                 'project': this.project
+
                 ,
             },
             query: {
-                'user': user
+                'user':
+                user
                 ,
-                'plan': plan
+                'plan':
+                plan
                 ,
-                'sim': sim
+                'sim':
+                sim
                 ,
-                'status': status
+                'status':
+                status
                 ,
-                'after': after
+                'after':
+                after
                 ,
-                'before': before
+                'before':
+                before
                 ,
-                'limit': limit
+                'limit':
+                limit
                 ,
             },
         });
@@ -256,6 +272,7 @@ export class SubscriptionsService {
             url: '/projects/{project}/subscriptions',
             path: {
                 'project': this.project
+
                 ,
             },
             body: requestBody,

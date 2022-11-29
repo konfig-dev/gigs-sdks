@@ -39,12 +39,9 @@ export class PlansService {
             method: 'GET',
             url: '/projects/{project}/plans/{plan}/documents/{id}',
             path: {
-                'project': project
-                ,
-                'plan': plan
-                ,
-                'id': id
-                ,
+                'project': project,
+                'plan': plan,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -93,10 +90,8 @@ export class PlansService {
             method: 'GET',
             url: '/projects/{project}/plans/{plan}/documents',
             path: {
-                'project': project
-                ,
-                'plan': plan
-                ,
+                'project': project,
+                'plan': plan,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -127,10 +122,8 @@ export class PlansService {
             method: 'GET',
             url: '/projects/{project}/plans/{id}',
             path: {
-                'project': project
-                ,
-                'id': id
-                ,
+                'project': project,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -179,10 +172,8 @@ export class PlansService {
             method: 'PATCH',
             url: '/projects/{project}/plans/{id}',
             path: {
-                'project': project
-                ,
-                'id': id
-                ,
+                'project': project,
+                'id': id,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -225,10 +216,8 @@ export class PlansService {
             method: 'POST',
             url: '/projects/{project}/plans/{id}/archive',
             path: {
-                'project': project
-                ,
-                'id': id
-                ,
+                'project': project,
+                'id': id,
             },
             errors: {
                 403: `The authenticated user doesn't have permissions to perform the request.`,
@@ -269,10 +258,8 @@ export class PlansService {
             method: 'POST',
             url: '/projects/{project}/plans/{id}/publish',
             path: {
-                'project': project
-                ,
-                'id': id
-                ,
+                'project': project,
+                'id': id,
             },
             errors: {
                 403: `The authenticated user doesn't have permissions to perform the request.`,
@@ -347,22 +334,15 @@ export class PlansService {
             method: 'GET',
             url: '/projects/{project}/plans',
             path: {
-                'project': project
-                ,
+                'project': project,
             },
             query: {
-                'provider': provider
-                ,
-                'simType': simType
-                ,
-                'status': status
-                ,
-                'after': after
-                ,
-                'before': before
-                ,
-                'limit': limit
-                ,
+                'provider': provider,
+                'simType': simType,
+                'status': status,
+                'after': after,
+                'before': before,
+                'limit': limit,
             },
         });
     }

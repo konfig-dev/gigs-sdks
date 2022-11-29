@@ -33,12 +33,8 @@ export class SiMsService {
             method: 'GET',
             url: '/projects/{project}/sims/{id}',
             path: {
-                'project': this.project
-
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -64,12 +60,8 @@ export class SiMsService {
             method: 'GET',
             url: '/projects/{project}/sims/{id}/credentials',
             path: {
-                'project': this.project
-
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -121,9 +113,7 @@ export class SiMsService {
             method: 'POST',
             url: '/projects/{project}/sims/search',
             path: {
-                'project': this.project
-
-                ,
+                'project': this.project,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -198,32 +188,16 @@ export class SiMsService {
             method: 'GET',
             url: '/projects/{project}/sims',
             path: {
-                'project': this.project
-
-                ,
+                'project': this.project,
             },
             query: {
-                'provider':
-                provider
-                ,
-                'status':
-                status
-                ,
-                'type':
-                type
-                ,
-                'user':
-                user
-                ,
-                'after':
-                after
-                ,
-                'before':
-                before
-                ,
-                'limit':
-                limit
-                ,
+                'provider': provider,
+                'status': status,
+                'type': type,
+                'user': user,
+                'after': after,
+                'before': before,
+                'limit': limit,
             },
             errors: {
                 422: `The request can't be processed, often due to an invalid parameter or incompatible system state.`,

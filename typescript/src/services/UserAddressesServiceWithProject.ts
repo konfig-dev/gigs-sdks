@@ -49,12 +49,8 @@ export class UserAddressesService {
             method: 'GET',
             url: '/projects/{project}/users/{user}/addresses',
             path: {
-                'project': this.project
-
-                ,
-                'user':
-                user
-                ,
+                'project': this.project,
+                'user': user,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -115,12 +111,8 @@ export class UserAddressesService {
             method: 'POST',
             url: '/projects/{project}/users/{user}/addresses',
             path: {
-                'project': this.project
-
-                ,
-                'user':
-                user
-                ,
+                'project': this.project,
+                'user': user,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -154,15 +146,9 @@ export class UserAddressesService {
             method: 'GET',
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {
-                'project': this.project
-
-                ,
-                'user':
-                user
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'user': user,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -194,15 +180,9 @@ export class UserAddressesService {
             method: 'DELETE',
             url: '/projects/{project}/users/{user}/addresses/{id}',
             path: {
-                'project': this.project
-
-                ,
-                'user':
-                user
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'user': user,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,

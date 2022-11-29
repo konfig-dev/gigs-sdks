@@ -32,12 +32,8 @@ export class UsersService {
             method: 'GET',
             url: '/projects/{project}/users/{id}',
             path: {
-                'project': this.project
-
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -63,12 +59,8 @@ export class UsersService {
             method: 'DELETE',
             url: '/projects/{project}/users/{id}',
             path: {
-                'project': this.project
-
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -122,12 +114,8 @@ export class UsersService {
             method: 'PATCH',
             url: '/projects/{project}/users/{id}',
             path: {
-                'project': this.project
-
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'id': id,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -178,9 +166,7 @@ export class UsersService {
             method: 'POST',
             url: '/projects/{project}/users/search',
             path: {
-                'project': this.project
-
-                ,
+                'project': this.project,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -235,20 +221,12 @@ export class UsersService {
             method: 'GET',
             url: '/projects/{project}/users',
             path: {
-                'project': this.project
-
-                ,
+                'project': this.project,
             },
             query: {
-                'after':
-                after
-                ,
-                'before':
-                before
-                ,
-                'limit':
-                limit
-                ,
+                'after': after,
+                'before': before,
+                'limit': limit,
             },
         });
     }
@@ -293,9 +271,7 @@ export class UsersService {
             method: 'POST',
             url: '/projects/{project}/users',
             path: {
-                'project': this.project
-
-                ,
+                'project': this.project,
             },
             body: requestBody,
             mediaType: 'application/json',

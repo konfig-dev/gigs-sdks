@@ -33,9 +33,7 @@ export class DevicesService {
             method: 'GET',
             url: '/deviceModels/{id}',
             path: {
-                'id':
-                id
-                ,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -103,24 +101,12 @@ export class DevicesService {
             method: 'GET',
             url: '/deviceModels',
             query: {
-                'type':
-                type
-                ,
-                'brand':
-                brand
-                ,
-                'simType':
-                simType
-                ,
-                'after':
-                after
-                ,
-                'before':
-                before
-                ,
-                'limit':
-                limit
-                ,
+                'type': type,
+                'brand': brand,
+                'simType': simType,
+                'after': after,
+                'before': before,
+                'limit': limit,
             },
             errors: {
                 422: `The request can't be processed, often due to an invalid parameter or incompatible system state.`,
@@ -193,12 +179,8 @@ export class DevicesService {
             method: 'GET',
             url: '/projects/{project}/devices/{id}',
             path: {
-                'project': this.project
-
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'id': id,
             },
             errors: {
                 404: `The requested resource doesn't exist.`,
@@ -224,12 +206,8 @@ export class DevicesService {
             method: 'DELETE',
             url: '/projects/{project}/devices/{id}',
             path: {
-                'project': this.project
-
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'id': id,
             },
             errors: {
                 403: `The authenticated user doesn't have permissions to perform the request.`,
@@ -283,12 +261,8 @@ export class DevicesService {
             method: 'PATCH',
             url: '/projects/{project}/devices/{id}',
             path: {
-                'project': this.project
-
-                ,
-                'id':
-                id
-                ,
+                'project': this.project,
+                'id': id,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -340,9 +314,7 @@ export class DevicesService {
             method: 'POST',
             url: '/projects/{project}/devices/search',
             path: {
-                'project': this.project
-
-                ,
+                'project': this.project,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -407,26 +379,14 @@ export class DevicesService {
             method: 'GET',
             url: '/projects/{project}/devices',
             path: {
-                'project': this.project
-
-                ,
+                'project': this.project,
             },
             query: {
-                'sim':
-                sim
-                ,
-                'user':
-                user
-                ,
-                'after':
-                after
-                ,
-                'before':
-                before
-                ,
-                'limit':
-                limit
-                ,
+                'sim': sim,
+                'user': user,
+                'after': after,
+                'before': before,
+                'limit': limit,
             },
             errors: {
                 422: `The request can't be processed, often due to an invalid parameter or incompatible system state.`,
@@ -469,9 +429,7 @@ export class DevicesService {
             method: 'POST',
             url: '/projects/{project}/devices',
             path: {
-                'project': this.project
-
-                ,
+                'project': this.project,
             },
             body: requestBody,
             mediaType: 'application/json',

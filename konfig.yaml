@@ -8,6 +8,7 @@ generators:
     clientName: GigsClient
     httpClient: node
     removeTagFromOperationId: true
+    useOptions: true
     git:
       userId: konfig-dev
       repoId: gigs-sdks-2/tree/main/typescript

@@ -5,8 +5,10 @@ generators:
     generatorVersion: 2
     copyDirectory: typescript
     npmName: gigs-typescript-sdk
+    npmDescription: SDK for Gigs REST API
     clientName: GigsClient
     httpClient: node
+    npmAuthor: gigs.com
     removeTagFromOperationId: true
     useOptions: true
     parameterState:

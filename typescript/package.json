@@ -1,7 +1,7 @@
 {
   "name": "gigs-typescript-sdk",
   "version": "1.0.0",
-  "description": "SDK for Gig's REST API",
+  "description": "SDK for Gigs REST API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/konfig-dev/gigs-sdks-2/tree/main/typescript",

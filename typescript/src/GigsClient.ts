@@ -33,7 +33,7 @@ export class GigsClient {
 
     constructor(config?: Partial<ConfigType>, HttpRequest: HttpRequestConstructor = NodeHttpRequest) {
         this.request = new HttpRequest({
-            BASE: config?.BASE ?? 'http://localhost:4010',
+            BASE: config?.BASE ?? 'https://api.gigs.com',
             VERSION: config?.VERSION ?? '2022-09-28',
             WITH_CREDENTIALS: config?.WITH_CREDENTIALS ?? false,
             CREDENTIALS: config?.CREDENTIALS ?? 'include',

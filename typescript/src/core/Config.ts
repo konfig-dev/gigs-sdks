@@ -19,7 +19,7 @@ export type ConfigType = {
 };
 
 export const Config: ConfigType = {
-    BASE: 'http://localhost:4010',
+    BASE: 'https://api.gigs.com',
     VERSION: '2022-09-28',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',

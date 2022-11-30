@@ -2,7 +2,10 @@ import { GigsClient } from "./GigsClient";
 
 describe("getting started", () => {
   it("basic use case", async () => {
-    const gigs = new GigsClient({ TOKEN: "MyAuthToken" }).project("MyProject");
+    const gigs = new GigsClient({
+      BASE: "http://localhost:4010",
+      TOKEN: "MyAuthToken",
+    }).project("MyProject");
     const user = await gigs.users.create({
       requestBody: {
         email: "test@test.com",
@@ -27,21 +30,22 @@ describe("getting started", () => {
 
     console.log(subscription);
 
-    // let status = await client.subscriptions.subscriptionsRetrieve({
-    //   project: PROJECT,
-    //   id: subscription.id,
-    // });
-    // while (status.sim.status !== subscription.status) {
-    //   status = await client.subscriptions.subscriptionsRetrieve({
-    //     project: PROJECT,
-    //     id: subscription.id,
-    //   });
-    // }
-    // console.log("eSIM is active!");
+    let status = await gigs.subscriptions.retrieve({
+      id: subscription.id,
+    });
+    while (status.sim?.status !== subscription.status) {
+      status = await gigs.subscriptions.retrieve({
+        id: subscription.id,
+      });
+    }
+    console.log("eSIM is active!");
   });
 
   it("pagination", async () => {
-    const gigs = new GigsClient({ TOKEN: "MyAuthToken" });
+    const gigs = new GigsClient({
+      BASE: "http://localhost:4010",
+      TOKEN: "MyAuthToken",
+    });
     const test = async () => {
       let i = 0;
       let page = await gigs.devices.deviceModelsList({});
@@ -50,7 +54,6 @@ describe("getting started", () => {
         i++;
         next = await next.next();
       }
-      console.log(i);
     };
     for (const x in Array(200).fill("a")) {
       await test();

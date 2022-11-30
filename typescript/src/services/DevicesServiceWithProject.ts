@@ -6,6 +6,8 @@ import type { deviceModel } from '../models/deviceModel';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import { Page } from "../core/Page";
+import { paginate } from "../core/paginate";
 
 export class DevicesService {
 
@@ -47,7 +49,7 @@ export class DevicesService {
      * @returns any Returns a dictionary with an items property that contains an array of device models.
      * @throws ApiError
      */
-    public deviceModelsList({
+    private _deviceModelsList({
         type,
         brand,
         simType,
@@ -113,6 +115,77 @@ export class DevicesService {
             },
         });
     }
+
+    /**
+     * List all device models
+     * Returns a list of device models. The models returned are sorted by creation date, with the most recently created models appearing first.
+     * @returns any Returns a dictionary with an items property that contains an array of device models.
+     * @throws ApiError
+     */
+    public deviceModelsList({
+        type,
+        brand,
+        simType,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * A comma-separated list of types to be filtered by.
+         */
+        type?: Array<'car' | 'iot' | 'laptop' | 'router' | 'smartphone' | 'feature-phone' | 'smartwatch' | 'tablet' | 'wearable' | 'other'>,
+        /**
+         * A comma-separated list of brands to be filtered by.
+         */
+        brand?: Array<string>,
+        /**
+         * A comma-separated list of SIM types to be filtered by.
+         */
+        simType?: Array<'eSIM' | 'pSIM'>,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
+        after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
+        before?: string,
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): Promise<Page<{
+        /**
+         * Type of object is always `list`.
+         */
+        object: string;
+        /**
+         * List of objects of type `deviceModel`.
+         */
+        items: Array<deviceModel>;
+        /**
+         * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+         */
+        moreItemsAfter: string | null;
+        /**
+         * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+         */
+        moreItemsBefore: string | null;
+    }, Parameters<DevicesService["_deviceModelsList"]>[0]>> {
+        const initialParameters: Parameters<DevicesService["_deviceModelsList"]>[0] = {
+            type,
+            brand,
+            simType,
+            after,
+            before,
+            limit,
+        };
+        return paginate(
+            (parameters) => this._deviceModelsList(parameters),
+            initialParameters
+        );
+    }
+
 
     /**
      * Search for device models
@@ -330,7 +403,7 @@ export class DevicesService {
      * @returns any Returns a dictionary with an items property that contains an array of devices.
      * @throws ApiError
      */
-    public list({
+    private _list({
         sim,
         user,
         after,
@@ -393,6 +466,71 @@ export class DevicesService {
             },
         });
     }
+
+    /**
+     * List all devices
+     * Returns a list of devices. The devices returned are sorted by creation date, with the most recently created devices appearing first.
+     * @returns any Returns a dictionary with an items property that contains an array of devices.
+     * @throws ApiError
+     */
+    public list({
+        sim,
+        user,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The unique identifier for the sim to be filtered by.
+         */
+        sim?: string,
+        /**
+         * The unique identifier for the user to be filtered by.
+         */
+        user?: string,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
+        after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
+        before?: string,
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): Promise<Page<{
+        /**
+         * Type of object is always `list`.
+         */
+        object: string;
+        /**
+         * List of objects of type `device`.
+         */
+        items: Array<device>;
+        /**
+         * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+         */
+        moreItemsAfter: string | null;
+        /**
+         * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+         */
+        moreItemsBefore: string | null;
+    }, Parameters<DevicesService["_list"]>[0]>> {
+        const initialParameters: Parameters<DevicesService["_list"]>[0] = {
+            sim,
+            user,
+            after,
+            before,
+            limit,
+        };
+        return paginate(
+            (parameters) => this._list(parameters),
+            initialParameters
+        );
+    }
+
 
     /**
      * Create a device

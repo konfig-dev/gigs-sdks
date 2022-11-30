@@ -6,6 +6,8 @@ import type { projectSetting } from '../models/projectSetting';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import { Page } from "../core/Page";
+import { paginate } from "../core/paginate";
 
 export class ProjectsService {
 
@@ -40,7 +42,7 @@ export class ProjectsService {
      * @returns any Returns a dictionary with an items property that contains an array of projects.
      * @throws ApiError
      */
-    public list({
+    private _list({
         after,
         before,
         limit = 10,
@@ -88,6 +90,59 @@ export class ProjectsService {
             },
         });
     }
+
+    /**
+     * List all projects
+     * Returns a list of projects. The projects returned are sorted by creation date, with the most recently created projects appearing first.
+     * @returns any Returns a dictionary with an items property that contains an array of projects.
+     * @throws ApiError
+     */
+    public list({
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
+        after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
+        before?: string,
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): Promise<Page<{
+        /**
+         * Type of object is always `list`.
+         */
+        object: string;
+        /**
+         * List of objects of type `project`.
+         */
+        items: Array<project>;
+        /**
+         * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+         */
+        moreItemsAfter: string | null;
+        /**
+         * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+         */
+        moreItemsBefore: string | null;
+    }, Parameters<ProjectsService["_list"]>[0]>> {
+        const initialParameters: Parameters<ProjectsService["_list"]>[0] = {
+            after,
+            before,
+            limit,
+        };
+        return paginate(
+            (parameters) => this._list(parameters),
+            initialParameters
+        );
+    }
+
 
     /**
      * Retrieve a project setting
@@ -138,7 +193,7 @@ export class ProjectsService {
      * @returns any Returns a list of project setting objects.
      * @throws ApiError
      */
-    public ettingsList({
+    private _ettingsList({
         after,
         before,
         limit = 10,
@@ -186,5 +241,66 @@ export class ProjectsService {
             },
         });
     }
+
+    /**
+     * List all project settings
+     * Returns a list of project settings.
+     *
+     * <!-- theme: info -->
+     * > #### Preview
+     * >
+     * > This endpoint is currently in preview and might change in the future.
+     * > We’re excited to hear your feedback and ideas. Please send an email
+     * > to [support@gigs.com](mailto:support@gigs.com) to share your thoughts.
+     *
+     * @returns any Returns a list of project setting objects.
+     * @throws ApiError
+     */
+    public ettingsList({
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
+        after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
+        before?: string,
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): Promise<Page<{
+        /**
+         * Type of object is always `list`.
+         */
+        object: string;
+        /**
+         * List of objects of type `projectSetting`.
+         */
+        items: Array<projectSetting>;
+        /**
+         * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+         */
+        moreItemsAfter: string | null;
+        /**
+         * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+         */
+        moreItemsBefore: string | null;
+    }, Parameters<ProjectsService["_ettingsList"]>[0]>> {
+        const initialParameters: Parameters<ProjectsService["_ettingsList"]>[0] = {
+            after,
+            before,
+            limit,
+        };
+        return paginate(
+            (parameters) => this._ettingsList(parameters),
+            initialParameters
+        );
+    }
+
 
 }

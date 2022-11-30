@@ -6,6 +6,8 @@ import type { simCredentials } from '../models/simCredentials';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import { Page } from "../core/Page";
+import { paginate } from "../core/paginate";
 
 export class SiMsService {
 
@@ -129,7 +131,7 @@ export class SiMsService {
      * @returns any Returns a dictionary with an items property that contains an array of SIMs.
      * @throws ApiError
      */
-    public list({
+    private _list({
         provider,
         status,
         type,
@@ -204,5 +206,82 @@ export class SiMsService {
             },
         });
     }
+
+    /**
+     * List all SIMs
+     * Returns a list of SIMs. The SIMs returned are sorted by creation date, with the most recently created SIMs appearing first.
+     * @returns any Returns a dictionary with an items property that contains an array of SIMs.
+     * @throws ApiError
+     */
+    public list({
+        provider,
+        status,
+        type,
+        user,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The network provider ID for the sim to be filtered by.
+         */
+        provider?: Array<string>,
+        /**
+         * A comma-separated list of statuses to filter the sims by.
+         */
+        status?: Array<'inactive' | 'active' | 'retired'>,
+        /**
+         * The type for the sim to be filtered by.
+         */
+        type?: 'eSIM' | 'pSIM',
+        /**
+         * The unique identifier for the user to be filtered by.
+         */
+        user?: string,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
+        after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
+        before?: string,
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): Promise<Page<{
+        /**
+         * Type of object is always `list`.
+         */
+        object: string;
+        /**
+         * List of objects of type `sim`.
+         */
+        items: Array<sim>;
+        /**
+         * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+         */
+        moreItemsAfter: string | null;
+        /**
+         * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+         */
+        moreItemsBefore: string | null;
+    }, Parameters<SiMsService["_list"]>[0]>> {
+        const initialParameters: Parameters<SiMsService["_list"]>[0] = {
+            provider,
+            status,
+            type,
+            user,
+            after,
+            before,
+            limit,
+        };
+        return paginate(
+            (parameters) => this._list(parameters),
+            initialParameters
+        );
+    }
+
 
 }

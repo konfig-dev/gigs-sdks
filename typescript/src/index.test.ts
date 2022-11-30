@@ -8,7 +8,7 @@ describe("getting started", () => {
         email: "test@test.com",
       },
     });
-    const plan = (await gigs.plans.list({})).items[0];
+    const plan = (await gigs.plans.list({})).data.items[0];
     const userAddress = await gigs.userAddresses.create({
       user: user.id,
       requestBody: {

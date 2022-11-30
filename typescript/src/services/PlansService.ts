@@ -6,6 +6,8 @@ import type { planDocument } from '../models/planDocument';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import { Page } from "../core/Page";
+import { paginate } from "../core/paginate";
 
 export class PlansService {
 
@@ -275,7 +277,7 @@ export class PlansService {
      * @returns any Returns a list of plan objects.
      * @throws ApiError
      */
-    public list({
+    private _list({
         project,
         provider,
         simType,
@@ -346,5 +348,82 @@ export class PlansService {
             },
         });
     }
+
+    /**
+     * List all plans
+     * Returns a list of plans.
+     * @returns any Returns a list of plan objects.
+     * @throws ApiError
+     */
+    public list({
+        project,
+        provider,
+        simType,
+        status,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
+        project: string,
+        /**
+         * The network provider ID to filter the plans by.
+         */
+        provider?: Array<string>,
+        /**
+         * The type of SIM card to filter the plans by.
+         */
+        simType?: Array<'eSIM' | 'pSIM'>,
+        /**
+         * The status to filter the plans by. Only available plans are returned by default.
+         */
+        status?: Array<'available' | 'archived' | 'pending' | 'draft'>,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
+        after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
+        before?: string,
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): Promise<Page<{
+        /**
+         * Type of object is always `list`.
+         */
+        object: string;
+        /**
+         * List of objects of type `plan`.
+         */
+        items: Array<plan>;
+        /**
+         * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+         */
+        moreItemsAfter: string | null;
+        /**
+         * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+         */
+        moreItemsBefore: string | null;
+    }, Parameters<PlansService["_list"]>[0]>> {
+        const initialParameters: Parameters<PlansService["_list"]>[0] = {
+            project,
+            provider,
+            simType,
+            status,
+            after,
+            before,
+            limit,
+        };
+        return paginate(
+            (parameters) => this._list(parameters),
+            initialParameters
+        );
+    }
+
 
 }

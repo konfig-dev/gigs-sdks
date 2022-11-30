@@ -1,17 +1,24 @@
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
 import { CancelablePromise } from "./CancelablePromise";
 import { Page, PageInfo, PageParameters } from "./Page";
 
-export type Request<Data> = (
-  parameters: PageParameters
-) => CancelablePromise<Data>;
+export type Request<
+  Data extends PageInfo,
+  Parameters extends PageParameters
+> = (parameters: Parameters) => CancelablePromise<Data>;
 
-export abstract class Pageable<Data extends PageInfo> {
+export abstract class Pageable<
+  Data extends PageInfo,
+  Parameters extends PageParameters
+> {
   readonly data: Data;
-  readonly initialParameters: PageParameters;
-  private readonly _request: Request<Data>;
+  readonly initialParameters: Parameters;
+  private readonly _request: Request<Data, Parameters>;
 
-  abstract prev(): Promise<Pageable<Data> | null>;
-  abstract next(): Promise<Pageable<Data> | null>;
+  abstract prev(): Promise<Pageable<Data, Parameters> | null>;
+  abstract next(): Promise<Pageable<Data, Parameters> | null>;
 
   /**
    * Helper for invoking a request
@@ -23,7 +30,7 @@ export abstract class Pageable<Data extends PageInfo> {
   /**
    * Helper for creating new page
    */
-  withData(data: Data): Page<Data> {
+  withData(data: Data): Page<Data, Parameters> {
     return new Page({
       data,
       initialParameters: this.initialParameters,
@@ -37,8 +44,8 @@ export abstract class Pageable<Data extends PageInfo> {
     request,
   }: {
     data: Data;
-    initialParameters: PageParameters;
-    request: Request<Data>;
+    initialParameters: Parameters;
+    request: Request<Data, Parameters>;
   }) {
     this.data = data;
     this._request = request;

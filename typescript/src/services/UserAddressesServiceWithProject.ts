@@ -5,6 +5,8 @@ import type { userAddress } from '../models/userAddress';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import { Page } from "../core/Page";
+import { paginate } from "../core/paginate";
 
 export class UserAddressesService {
 

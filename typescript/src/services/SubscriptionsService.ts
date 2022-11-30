@@ -5,6 +5,8 @@ import type { subscription } from '../models/subscription';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import { Page } from "../core/Page";
+import { paginate } from "../core/paginate";
 
 export class SubscriptionsService {
 
@@ -147,7 +149,7 @@ export class SubscriptionsService {
      * @returns any Returns a list of subscription objects.
      * @throws ApiError
      */
-    public list({
+    private _list({
         project,
         user,
         plan,
@@ -224,6 +226,89 @@ export class SubscriptionsService {
             },
         });
     }
+
+    /**
+     * List all subscriptions
+     * Returns a list of subscriptions. The subscriptions returned are sorted by creation date, with the most recently created subscriptions appearing first.
+     * @returns any Returns a list of subscription objects.
+     * @throws ApiError
+     */
+    public list({
+        project,
+        user,
+        plan,
+        sim,
+        status,
+        after,
+        before,
+        limit = 10,
+    }: {
+        /**
+         * The unique identifier for the [project](https://developers.gigs.com/docs/api/b3A6MzMwODcxMzI-retrieve-a-project).
+         */
+        project: string,
+        /**
+         * The unique identifier for the user to be filtered by.
+         */
+        user?: string,
+        /**
+         * The unique identifier for the plan to be filtered by.
+         */
+        plan?: string,
+        /**
+         * The unique identifier for the sim to be filtered by.
+         */
+        sim?: string,
+        /**
+         * A comma-separated list of statuses to filter the subscriptions by. Only pending and active subscriptions are returned by default.
+         */
+        status?: Array<'pending' | 'active' | 'ended'>,
+        /**
+         * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+         */
+        after?: string,
+        /**
+         * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+         */
+        before?: string,
+        /**
+         * The limit of items to be returned in the list, between 0 and 200.
+         */
+        limit?: number,
+    }): Promise<Page<{
+        /**
+         * Type of object is always `list`.
+         */
+        object: string;
+        /**
+         * List of objects of type `subscription`.
+         */
+        items: Array<subscription>;
+        /**
+         * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+         */
+        moreItemsAfter: string | null;
+        /**
+         * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+         */
+        moreItemsBefore: string | null;
+    }, Parameters<SubscriptionsService["_list"]>[0]>> {
+        const initialParameters: Parameters<SubscriptionsService["_list"]>[0] = {
+            project,
+            user,
+            plan,
+            sim,
+            status,
+            after,
+            before,
+            limit,
+        };
+        return paginate(
+            (parameters) => this._list(parameters),
+            initialParameters
+        );
+    }
+
 
     /**
      * Create a subscription

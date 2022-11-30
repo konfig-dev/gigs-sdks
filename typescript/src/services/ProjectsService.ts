@@ -161,7 +161,7 @@ export class ProjectsService {
      * @returns projectSetting Returns the project setting object if it exists.
      * @throws ApiError
      */
-    public ettingsRetrieve({
+    public settingsRetrieve({
         project,
         name,
     }: {
@@ -201,7 +201,7 @@ export class ProjectsService {
      * @returns any Returns a list of project setting objects.
      * @throws ApiError
      */
-    private _ettingsList({
+    private _settingsList({
         project,
         after,
         before,
@@ -269,7 +269,7 @@ export class ProjectsService {
      * @returns any Returns a list of project setting objects.
      * @throws ApiError
      */
-    public ettingsList({
+    public settingsList({
         project,
         after,
         before,
@@ -308,15 +308,15 @@ export class ProjectsService {
          * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
          */
         moreItemsBefore: string | null;
-    }, Parameters<ProjectsService["_ettingsList"]>[0]>> {
-        const initialParameters: Parameters<ProjectsService["_ettingsList"]>[0] = {
+    }, Parameters<ProjectsService["_settingsList"]>[0]>> {
+        const initialParameters: Parameters<ProjectsService["_settingsList"]>[0] = {
             project,
             after,
             before,
             limit,
         };
         return paginate(
-            (parameters) => this._ettingsList(parameters),
+            (parameters) => this._settingsList(parameters),
             initialParameters
         );
     }

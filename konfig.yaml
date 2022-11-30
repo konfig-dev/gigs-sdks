@@ -10,6 +10,9 @@ generators:
     httpClient: node
     npmAuthor: gigs.com
     removeTagFromOperationId: true
+    operationIdMapping:
+      ProjectSettingsRetrieve: settingsRetrieve
+      ProjectSettingsList: settingsList
     useOptions: true
     pagination:
       parameters:

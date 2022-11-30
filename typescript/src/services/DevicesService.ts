@@ -85,7 +85,7 @@ export class DevicesService {
      * The limit of items to be returned in the list, between 0 and 200.
      */
     limit?: number;
-  }): CancelablePromise<{
+  }): AsyncIterable<{
     /**
      * Type of object is always `list`.
      */
@@ -103,21 +103,48 @@ export class DevicesService {
      */
     moreItemsBefore: string | null;
   }> {
-    return this.httpRequest.request({
-      method: "GET",
-      url: "/deviceModels",
-      query: {
-        type: type,
-        brand: brand,
-        simType: simType,
-        after: after,
-        before: before,
-        limit: limit,
+    const getPage = async (parameters?: { after?: string | null }) =>
+      await this.httpRequest.request<{
+        /**
+         * Type of object is always `list`.
+         */
+        object: string;
+        /**
+         * List of objects of type `deviceModel`.
+         */
+        items: Array<deviceModel>;
+        /**
+         * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+         */
+        moreItemsAfter: string | null;
+        /**
+         * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+         */
+        moreItemsBefore: string | null;
+      }>({
+        method: "GET",
+        url: "/deviceModels",
+        query: {
+          type: type,
+          brand: brand,
+          simType: simType,
+          after: parameters?.after,
+          before: before,
+          limit: limit,
+        },
+        errors: {
+          422: `The request can't be processed, often due to an invalid parameter or incompatible system state.`,
+        },
+      });
+    let page = getPage({ after });
+    return {
+      [Symbol.asyncIterator]: async function* () {
+        while ((await page).moreItemsAfter !== null) {
+          page = getPage({ after: (await page).moreItemsAfter });
+          yield page;
+        }
       },
-      errors: {
-        422: `The request can't be processed, often due to an invalid parameter or incompatible system state.`,
-      },
-    });
+    };
   }
 
   /**

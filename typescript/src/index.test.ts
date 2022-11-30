@@ -39,4 +39,18 @@ describe("getting started", () => {
     // }
     // console.log("eSIM is active!");
   });
+
+  it("pagination", async () => {
+    const gigs = new GigsClient({ TOKEN: "MyAuthToken" });
+    const test = async () => {
+      let i = 0;
+      for await (const deviceModels of gigs.devices.deviceModelsList({})) {
+        i++;
+        console.log(`Page: ${i}`);
+      }
+    };
+    for (const j of Array.from(Array(10).keys())) {
+      await test();
+    }
+  });
 });

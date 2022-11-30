@@ -1,16 +1,23 @@
 import { GigsClient } from "./GigsClient";
 
 it("getting started", async () => {
+  // 1) Initialize a configuration with your API key
   const gigs = new GigsClient({
     BASE: "http://localhost:4010",
     TOKEN: "MyAuthToken",
   }).project("MyProject");
+
+  // 2) Creating a user
   const user = await gigs.users.create({
     requestBody: {
       email: "test@test.com",
     },
   });
+
+  // 3) Selecting a Plan
   const plan = (await gigs.plans.list({})).data.items[0];
+
+  // 4) Creating a User Address
   const userAddress = await gigs.userAddresses.create({
     user: user.id,
     requestBody: {
@@ -19,6 +26,8 @@ it("getting started", async () => {
       country: "USA",
     },
   });
+
+  // 5) Creating a Subscription
   const subscription = await gigs.subscriptions.create({
     requestBody: {
       plan: plan.id,
@@ -26,9 +35,9 @@ it("getting started", async () => {
       userAddress: userAddress.id,
     },
   });
-
   console.log(subscription);
 
+  // 6) Waiting for activation of eSIM
   let status = await gigs.subscriptions.retrieve({
     id: subscription.id,
   });
@@ -45,16 +54,15 @@ it("pagination", async () => {
     BASE: "http://localhost:4010",
     TOKEN: "MyAuthToken",
   });
-  const test = async () => {
-    let i = 0;
-    let page = await gigs.devices.deviceModelsList({});
-    let next = await page.next();
-    while (next !== null) {
-      i++;
-      next = await next.next();
-    }
-  };
-  for (const x in Array(200).fill("a")) {
-    await test();
+
+  // Paginate until the end
+  let pageNumber = 0;
+  const firstPage = await gigs.devices.deviceModelsList({});
+  let nextPage = await firstPage.next();
+  while (nextPage !== null) {
+    pageNumber++;
+    nextPage = await nextPage.next();
   }
+
+  console.log(`Paginated ${pageNumber} times`);
 });

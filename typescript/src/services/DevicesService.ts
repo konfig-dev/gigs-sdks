@@ -7,7 +7,7 @@ import type { deviceModel } from "../models/deviceModel";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import type { BaseHttpRequest } from "../core/BaseHttpRequest";
 import { Page } from "../core/Page";
-import { Pageable } from "../core/Pageable";
+import { paginate } from "../core/paginate";
 
 export class DevicesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -199,20 +199,10 @@ export class DevicesService {
       before,
       limit,
     };
-    return new Promise(async (resolve, reject) => {
-      try {
-        const data = await this._deviceModelsList(initialParameters);
-        resolve(
-          new Page({
-            data,
-            initialParameters,
-            request: (parameters) => this._deviceModelsList(parameters),
-          })
-        );
-      } catch (error) {
-        reject(error);
-      }
-    });
+    return paginate(
+      (parameters) => this._deviceModelsList(parameters),
+      initialParameters
+    );
   }
 
   /**

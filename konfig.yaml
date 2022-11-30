@@ -11,6 +11,14 @@ generators:
     npmAuthor: gigs.com
     removeTagFromOperationId: true
     useOptions: true
+    pagination:
+      parameters:
+        - before
+        - after
+        - limit
+      response:
+        - moreItemsAfter
+        - moreItemsBefore
     parameterState:
       - name: project
         type: string

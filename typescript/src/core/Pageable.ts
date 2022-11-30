@@ -1,7 +1,9 @@
 import { CancelablePromise } from "./CancelablePromise";
 import { Page, PageInfo, PageParameters } from "./Page";
 
-type Request<Data> = (parameters: PageParameters) => CancelablePromise<Data>;
+export type Request<Data> = (
+  parameters: PageParameters
+) => CancelablePromise<Data>;
 
 export abstract class Pageable<Data extends PageInfo> {
   readonly data: Data;

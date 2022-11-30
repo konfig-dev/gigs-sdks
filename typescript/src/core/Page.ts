@@ -1,27 +1,27 @@
 import { Pageable } from "./Pageable";
 
-interface PageParameters {
+export interface PageParameters {
   after?: string;
   before?: string;
 }
 
-interface PageInfo {
+export interface PageInfo {
   moreItemsAfter: string | null;
   moreItemsBefore: string | null;
 }
 
-export class Page<Data> extends Pageable<Data & PageInfo, PageParameters> {
+export class Page<Data extends PageInfo> extends Pageable<Data> {
   async prev(): Promise<Page<Data> | null> {
-    const before = (await this.data).moreItemsBefore;
+    const before = this.data.moreItemsBefore;
     if (before === null) return null;
-    const data = this.request({ before });
-    return new Page(data, this.initialParameters, this.request);
+    const data = await this.makeRequest({ before });
+    return this.withData(data);
   }
 
   async next(): Promise<Page<Data> | null> {
-    const after = (await this.data).moreItemsAfter;
+    const after = this.data.moreItemsAfter;
     if (after === null) return null;
-    const data = this.request({ after });
-    return new Page(data, this.initialParameters, this.request);
+    const data = await this.makeRequest({ after });
+    return this.withData(data);
   }
 }

@@ -7,6 +7,7 @@ import type { deviceModel } from "../models/deviceModel";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import type { BaseHttpRequest } from "../core/BaseHttpRequest";
 import { Page } from "../core/Page";
+import { Pageable } from "../core/Pageable";
 
 export class DevicesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -170,32 +171,26 @@ export class DevicesService {
      * The limit of items to be returned in the list, between 0 and 200.
      */
     limit?: number;
-  }): Page<{
-    /**
-     * Type of object is always `list`.
-     */
-    object: string;
-    /**
-     * List of objects of type `deviceModel`.
-     */
-    items: Array<deviceModel>;
-    /**
-     * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
-     */
-    moreItemsAfter: string | null;
-    /**
-     * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
-     */
-    moreItemsBefore: string | null;
-  }> {
-    const request = this._deviceModelsList({
-      type,
-      brand,
-      simType,
-      after,
-      before,
-      limit,
-    });
+  }): Promise<
+    Page<{
+      /**
+       * Type of object is always `list`.
+       */
+      object: string;
+      /**
+       * List of objects of type `deviceModel`.
+       */
+      items: Array<deviceModel>;
+      /**
+       * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+       */
+      moreItemsAfter: string | null;
+      /**
+       * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+       */
+      moreItemsBefore: string | null;
+    }>
+  > {
     const initialParameters = {
       type,
       brand,
@@ -204,11 +199,19 @@ export class DevicesService {
       before,
       limit,
     };
-    return new Page(request, initialParameters, (parameters) => {
-      return this._deviceModelsList({
-        ...initialParameters,
-        ...parameters,
-      });
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = await this._deviceModelsList(initialParameters);
+        resolve(
+          new Page({
+            data,
+            initialParameters,
+            request: (parameters) => this._deviceModelsList(parameters),
+          })
+        );
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 

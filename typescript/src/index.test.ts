@@ -42,13 +42,18 @@ describe("getting started", () => {
 
   it("pagination", async () => {
     const gigs = new GigsClient({ TOKEN: "MyAuthToken" });
-    let i = 0;
-    let page = gigs.devices.deviceModelsList({});
-    let next = await page.next();
-    while (next !== null) {
-      i++;
-      next = await next.next();
+    const test = async () => {
+      let i = 0;
+      let page = await gigs.devices.deviceModelsList({});
+      let next = await page.next();
+      while (next !== null) {
+        i++;
+        next = await next.next();
+      }
+      console.log(i);
+    };
+    for (const x in Array(200).fill("a")) {
+      await test();
     }
-    console.log(i);
   });
 });

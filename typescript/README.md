@@ -11,7 +11,8 @@ const gigs = new GigsClient({
 // 2) Creating a user
 const user = await gigs.users.create({
   requestBody: {
-    email: "test@test.com",
+    email: "ross@geller.com",
+    fullName: "Ross Geller",
   },
 });
 

@@ -3,7 +3,7 @@
 ### Getting Started
 
 ```typescript
-// 1) Initialize a configuration with your API key
+// 1) Initialize client with your API key and project name
 const gigs = new GigsClient({
   TOKEN: "MyAuthToken",
 }).project("MyProject");

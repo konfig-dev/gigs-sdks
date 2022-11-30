@@ -3,7 +3,6 @@ import { Pageable } from "./Pageable";
 interface PageParameters {
   after?: string;
   before?: string;
-  limit?: number;
 }
 
 interface PageInfo {

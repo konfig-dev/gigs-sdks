@@ -6,6 +6,7 @@ import type { deviceModel } from "../models/deviceModel";
 
 import type { CancelablePromise } from "../core/CancelablePromise";
 import type { BaseHttpRequest } from "../core/BaseHttpRequest";
+import { Page } from "../core/Page";
 
 export class DevicesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -32,6 +33,90 @@ export class DevicesService {
       },
       errors: {
         404: `The requested resource doesn't exist.`,
+      },
+    });
+  }
+
+  /**
+   * List all device models
+   * Returns a list of device models. The models returned are sorted by creation date, with the most recently created models appearing first.
+   * @returns any Returns a dictionary with an items property that contains an array of device models.
+   * @throws ApiError
+   */
+  private _deviceModelsList({
+    type,
+    brand,
+    simType,
+    after,
+    before,
+    limit = 10,
+  }: {
+    /**
+     * A comma-separated list of types to be filtered by.
+     */
+    type?: Array<
+      | "car"
+      | "iot"
+      | "laptop"
+      | "router"
+      | "smartphone"
+      | "feature-phone"
+      | "smartwatch"
+      | "tablet"
+      | "wearable"
+      | "other"
+    >;
+    /**
+     * A comma-separated list of brands to be filtered by.
+     */
+    brand?: Array<string>;
+    /**
+     * A comma-separated list of SIM types to be filtered by.
+     */
+    simType?: Array<"eSIM" | "pSIM">;
+    /**
+     * A cursor for use in pagination. The `after` parameter takes an object ID that defines the position in the list, only items immediately following the item with that ID will be returned.
+     */
+    after?: string;
+    /**
+     * A cursor for use in pagination. The `before` parameter takes an object ID that defines the position in the list, only items immediately preceding the item with that ID will be returned.
+     */
+    before?: string;
+    /**
+     * The limit of items to be returned in the list, between 0 and 200.
+     */
+    limit?: number;
+  }): CancelablePromise<{
+    /**
+     * Type of object is always `list`.
+     */
+    object: string;
+    /**
+     * List of objects of type `deviceModel`.
+     */
+    items: Array<deviceModel>;
+    /**
+     * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
+     */
+    moreItemsAfter: string | null;
+    /**
+     * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
+     */
+    moreItemsBefore: string | null;
+  }> {
+    return this.httpRequest.request({
+      method: "GET",
+      url: "/deviceModels",
+      query: {
+        type: type,
+        brand: brand,
+        simType: simType,
+        after: after,
+        before: before,
+        limit: limit,
+      },
+      errors: {
+        422: `The request can't be processed, often due to an invalid parameter or incompatible system state.`,
       },
     });
   }
@@ -85,7 +170,7 @@ export class DevicesService {
      * The limit of items to be returned in the list, between 0 and 200.
      */
     limit?: number;
-  }): AsyncIterable<{
+  }): Page<{
     /**
      * Type of object is always `list`.
      */
@@ -103,48 +188,28 @@ export class DevicesService {
      */
     moreItemsBefore: string | null;
   }> {
-    const getPage = async (parameters?: { after?: string | null }) =>
-      await this.httpRequest.request<{
-        /**
-         * Type of object is always `list`.
-         */
-        object: string;
-        /**
-         * List of objects of type `deviceModel`.
-         */
-        items: Array<deviceModel>;
-        /**
-         * A unique identifier to be used as `after` pagination parameter if more items are available sorted after the current batch of items.
-         */
-        moreItemsAfter: string | null;
-        /**
-         * A unique identifier to be used as `before` pagination parameter if more items are available sorted before the current batch of items.
-         */
-        moreItemsBefore: string | null;
-      }>({
-        method: "GET",
-        url: "/deviceModels",
-        query: {
-          type: type,
-          brand: brand,
-          simType: simType,
-          after: parameters?.after,
-          before: before,
-          limit: limit,
-        },
-        errors: {
-          422: `The request can't be processed, often due to an invalid parameter or incompatible system state.`,
-        },
-      });
-    let page = getPage({ after });
-    return {
-      [Symbol.asyncIterator]: async function* () {
-        while ((await page).moreItemsAfter !== null) {
-          page = getPage({ after: (await page).moreItemsAfter });
-          yield page;
-        }
-      },
+    const request = this._deviceModelsList({
+      type,
+      brand,
+      simType,
+      after,
+      before,
+      limit,
+    });
+    const initialParameters = {
+      type,
+      brand,
+      simType,
+      after,
+      before,
+      limit,
     };
+    return new Page(request, initialParameters, (parameters) => {
+      return this._deviceModelsList({
+        ...initialParameters,
+        ...parameters,
+      });
+    });
   }
 
   /**

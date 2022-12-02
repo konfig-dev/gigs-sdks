@@ -3,7 +3,7 @@ generators:
   typescript:
     packageVersion: 1.0.0
     generatorVersion: 2
-    copyDirectory: typescript
+    outputDirectory: typescript
     npmName: gigs-typescript-sdk
     npmDescription: SDK for Gigs REST API
     clientName: GigsClient
